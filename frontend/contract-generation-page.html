@@ -1,0 +1,1446 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contract Generation -ZinoEx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .step-indicator {
+        transition: all 0.3s ease;
+      }
+      .step-active {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+      .step-completed {
+        background: #10b981;
+      }
+      .contract-document {
+        line-height: 1.75;
+        color: #1f2937;
+      }
+
+      .contract-document .contract-title {
+        font-size: 1.65rem;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 1.75rem;
+        color: #111827;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .contract-document .contract-section-title {
+        font-size: 1.05rem;
+        font-weight: 800;
+        margin-top: 1.5rem;
+        margin-bottom: 0.65rem;
+        color: #111827;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 0.35rem;
+      }
+
+      .contract-document .contract-subsection-title {
+        font-size: 0.98rem;
+        font-weight: 700;
+        margin-top: 1rem;
+        margin-bottom: 0.35rem;
+        color: #374151;
+      }
+
+      .contract-document .contract-paragraph {
+        margin-bottom: 0.85rem;
+        font-size: 0.95rem;
+      }
+
+      .contract-document .signature-block {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px dashed #d1d5db;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Header (Simple) -->
+    <header class="bg-white border-b sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center"
+          >
+            <svg
+              class="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">Contract Generation</h1>
+            <p class="text-xs text-gray-500">AI-Powered Contract Creation</p>
+          </div>
+        </div>
+        <button
+          onclick="window.history.back()"
+          class="text-gray-600 hover:text-gray-800"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-6 py-8">
+      <!-- Progress Steps -->
+      <div class="mb-12">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex-1 flex items-center" onclick="goToStep(1)">
+            <div
+              id="step-1"
+              class="step-indicator step-active w-10 h-10 rounded-full flex items-center justify-center text-white font-bold cursor-pointer"
+            >
+              1
+            </div>
+            <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+          </div>
+          <div class="flex-1 flex items-center" onclick="goToStep(2)">
+            <div
+              id="step-2"
+              class="step-indicator w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 text-gray-600 font-bold cursor-pointer"
+            >
+              2
+            </div>
+            <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+          </div>
+          <div onclick="goToStep(3)">
+            <div
+              id="step-3"
+              class="step-indicator w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 text-gray-600 font-bold cursor-pointer"
+            >
+              3
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-blue-600 font-semibold">Select Type</span>
+          <span class="text-gray-500">Answer Questions</span>
+          <span class="text-gray-500">Generate Contract</span>
+        </div>
+      </div>
+
+      <!-- Step 1: Contract Type Selection -->
+      <div id="step-1-content" class="fade-in">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">
+          Select Contract Type
+        </h2>
+        <p class="text-gray-600 mb-8">
+          Choose the type of contract you want to generate
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Employment -->
+          <div
+            onclick="selectContractType('employment')"
+            class="contract-type-card cursor-pointer bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4"
+            >
+              <span class="text-3xl">👔</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Employment Agreement
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Full-time or part-time employment contracts
+            </p>
+            <div class="flex items-center text-blue-600 text-sm font-semibold">
+              <span>Select</span>
+              <svg
+                class="w-4 h-4 ml-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Contractor -->
+          <div
+            onclick="selectContractType('contractor')"
+            class="contract-type-card cursor-pointer bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-green-500 hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center mb-4"
+            >
+              <span class="text-3xl">💻</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Contractor Agreement
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Independent contractor or freelancer contracts
+            </p>
+            <div class="flex items-center text-green-600 text-sm font-semibold">
+              <span>Select</span>
+              <svg
+                class="w-4 h-4 ml-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- NDA -->
+          <div
+            onclick="selectContractType('nda')"
+            class="contract-type-card cursor-pointer bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-purple-500 hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center mb-4"
+            >
+              <span class="text-3xl">🔒</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              NDA (Non-Disclosure)
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Confidentiality and non-disclosure agreements
+            </p>
+            <div
+              class="flex items-center text-purple-600 text-sm font-semibold"
+            >
+              <span>Select</span>
+              <svg
+                class="w-4 h-4 ml-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Service Agreement -->
+          <div
+            onclick="selectContractType('service')"
+            class="contract-type-card cursor-pointer bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center mb-4"
+            >
+              <span class="text-3xl">🤝</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Service Agreement
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Service provider and client agreements
+            </p>
+            <div
+              class="flex items-center text-orange-600 text-sm font-semibold"
+            >
+              <span>Select</span>
+              <svg
+                class="w-4 h-4 ml-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Terms of Service -->
+          <div
+            onclick="selectContractType('tos')"
+            class="contract-type-card cursor-pointer bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-pink-500 hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-14 h-14 bg-pink-50 rounded-xl flex items-center justify-center mb-4"
+            >
+              <span class="text-3xl">📜</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Terms of Service
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Website or app terms and conditions
+            </p>
+            <div class="flex items-center text-pink-600 text-sm font-semibold">
+              <span>Select</span>
+              <svg
+                class="w-4 h-4 ml-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Custom Contract -->
+          <div
+            onclick="selectContractType('custom')"
+            class="contract-type-card cursor-pointer bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-indigo-500 hover:shadow-xl transition-all md:col-span-2 lg:col-span-3"
+          >
+            <div
+              class="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-4"
+            >
+              <span class="text-3xl">✨</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Custom Contract
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Describe your needs and AI will generate a custom contract
+            </p>
+            <div
+              class="flex items-center text-indigo-600 text-sm font-semibold"
+            >
+              <span>Select</span>
+              <svg
+                class="w-4 h-4 ml-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Questions (Hidden initially) -->
+      <div id="step-2-content" class="hidden">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">
+              Answer Questions
+            </h2>
+            <p class="text-gray-600">
+              Fill in the details for your
+              <span id="selected-type-name" class="font-semibold text-blue-600"
+                >contract</span
+              >
+            </p>
+          </div>
+          <div class="text-right">
+            <div class="text-sm text-gray-500">Progress</div>
+            <div class="text-2xl font-bold text-blue-600">
+              <span id="progress-count">0</span>/<span id="total-count">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="questions-container" class="space-y-8">
+          <!-- سوالات اینجا لود میشن -->
+        </div>
+
+        <div class="mt-12 flex gap-4">
+          <button
+            onclick="goToStep(1)"
+            class="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:border-gray-400 transition-all"
+          >
+            ← Back
+          </button>
+          <button
+            onclick="goToStep(3)"
+            class="flex-1 px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:shadow-xl transition-all"
+          >
+            Continue to Generate →
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Generate (Hidden initially) -->
+      <div id="step-3-content" class="hidden">
+        <div class="text-center max-w-2xl mx-auto">
+          <div
+            class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6"
+          >
+            <svg
+              class="w-10 h-10 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
+            </svg>
+          </div>
+
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">
+            Ready to Generate
+          </h2>
+          <p class="text-gray-600 mb-8">
+            Review your selections and generate your AI-powered contract
+          </p>
+
+          <div class="bg-gray-50 rounded-2xl p-6 mb-8 text-left">
+            <h3 class="font-bold text-gray-800 mb-4">Summary</h3>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-gray-600">Contract Type:</span>
+                <span id="summary-type" class="font-semibold text-gray-800"
+                  >-</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Questions Answered:</span>
+                <span id="summary-answered" class="font-semibold text-gray-800"
+                  >-</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <button
+            onclick="generateContract()"
+            id="generate-btn"
+            class="w-full px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white rounded-xl font-bold text-lg hover:shadow-2xl transition-all"
+          >
+            🚀 Generate Contract with AI
+          </button>
+
+          <button
+            onclick="goToStep(2)"
+            class="w-full mt-4 px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:border-gray-400 transition-all"
+          >
+            ← Back to Questions
+          </button>
+        </div>
+
+        <!-- Generated Contract (Hidden) -->
+        <div id="generated-contract" class="hidden mt-12">
+          <div class="bg-white border-2 border-green-500 rounded-2xl p-8">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-2xl font-bold text-gray-800">
+                ✅ Contract Generated!
+              </h3>
+              <div class="flex gap-2">
+                <button
+                  onclick="copyContract()"
+                  class="px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-blue-500 transition-all"
+                >
+                  📋 Copy
+                </button>
+                <button
+                  onclick="downloadContract()"
+                  class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
+                >
+                  ⬇️ Download
+                </button>
+              </div>
+            </div>
+            <div
+              id="contract-content"
+              class="bg-gray-50 p-8 rounded-xl text-sm max-h-[650px] overflow-y-auto contract-document border border-gray-200"
+            >
+              <!-- Contract content here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentStep = 1;
+      let selectedContractType = null;
+      let answers = {};
+      let generatedContractText = "";
+
+      // Contract questions data
+      const contractQuestions = {
+        employment: [
+          {
+            category: "Parties & Business Identity",
+            questions: [
+              {
+                id: "employer",
+                text: "Who is the employer? (Legal name)",
+                type: "text",
+              },
+              {
+                id: "employee",
+                text: "Who is the employee? (Full legal name)",
+                type: "text",
+              },
+            ],
+          },
+          {
+            category: "Position & Duties",
+            questions: [
+              {
+                id: "position",
+                text: "What is the employee's job title and main responsibilities?",
+                type: "textarea",
+              },
+            ],
+          },
+          {
+            category: "Employment Status & Term",
+            questions: [
+              {
+                id: "term",
+                text: "Is the employment for a fixed term or indefinite duration?",
+                type: "radio",
+                options: ["Fixed-term", "Indefinite"],
+              },
+            ],
+          },
+          {
+            category: "Compensation",
+            questions: [
+              {
+                id: "comp_type",
+                text: "How will the employee be compensated?",
+                type: "radio",
+                options: ["Hourly", "Salary", "Salary + bonus"],
+              },
+              {
+                id: "payment_freq",
+                text: "How often will the employee be paid?",
+                type: "radio",
+                options: ["Weekly", "Bi-weekly", "Monthly"],
+              },
+            ],
+          },
+          {
+            category: "Working Conditions",
+            questions: [
+              {
+                id: "fulltime",
+                text: "Is this a full-time or part-time position?",
+                type: "radio",
+                options: ["Full-time", "Part-time"],
+              },
+            ],
+          },
+          {
+            category: "Confidentiality & IP",
+            questions: [
+              {
+                id: "confidential",
+                text: "Will the employee have access to confidential information?",
+                type: "radio",
+                options: ["Yes", "No"],
+              },
+              {
+                id: "ip",
+                text: "Will the employee create intellectual property as part of their work?",
+                type: "radio",
+                options: ["Yes", "No"],
+              },
+            ],
+          },
+          {
+            category: "Termination",
+            questions: [
+              {
+                id: "termination",
+                text: "Can the employer terminate employment without cause, subject to notice?",
+                type: "radio",
+                options: ["Yes", "No"],
+              },
+            ],
+          },
+          {
+            category: "Governing Law",
+            questions: [
+              {
+                id: "jurisdiction",
+                text: "What is the governing law and jurisdiction?",
+                type: "radio",
+                options: ["Quebec", "Ontario", "Other"],
+              },
+              {
+                id: "dispute",
+                text: "Do you prefer arbitration or court litigation for dispute resolution?",
+                type: "radio",
+                options: ["Courts", "Arbitration", "Not specified"],
+              },
+            ],
+          },
+        ],
+        contractor: [
+          {
+            category: "Parties",
+            questions: [
+              {
+                id: "client",
+                text: "Who is the client/company?",
+                type: "text",
+              },
+              {
+                id: "contractor",
+                text: "Who is the contractor?",
+                type: "text",
+              },
+            ],
+          },
+          {
+            category: "Scope of Work",
+            questions: [
+              {
+                id: "scope",
+                text: "Describe the services to be provided",
+                type: "textarea",
+              },
+              {
+                id: "deliverables",
+                text: "What are the expected deliverables?",
+                type: "textarea",
+              },
+            ],
+          },
+          {
+            category: "Compensation",
+            questions: [
+              {
+                id: "rate",
+                text: "What is the payment rate?",
+                type: "text",
+              },
+              {
+                id: "payment_terms",
+                text: "Payment terms",
+                type: "radio",
+                options: ["Upon completion", "Monthly", "Milestone-based"],
+              },
+            ],
+          },
+          {
+            category: "Term",
+            questions: [
+              {
+                id: "start_date",
+                text: "Project start date",
+                type: "date",
+              },
+              {
+                id: "end_date",
+                text: "Expected completion date",
+                type: "date",
+              },
+            ],
+          },
+        ],
+        nda: [
+          {
+            category: "Parties",
+            questions: [
+              {
+                id: "disclosing",
+                text: "Disclosing Party name",
+                type: "text",
+              },
+              {
+                id: "receiving",
+                text: "Receiving Party name",
+                type: "text",
+              },
+            ],
+          },
+          {
+            category: "Type of NDA",
+            questions: [
+              {
+                id: "nda_type",
+                text: "Type of NDA",
+                type: "radio",
+                options: ["Mutual", "One-way"],
+              },
+            ],
+          },
+          {
+            category: "Purpose",
+            questions: [
+              {
+                id: "purpose",
+                text: "Purpose of disclosure",
+                type: "textarea",
+              },
+            ],
+          },
+          {
+            category: "Duration",
+            questions: [
+              {
+                id: "duration",
+                text: "How long should the NDA remain in effect?",
+                type: "radio",
+                options: ["1 year", "2 years", "3 years", "5 years"],
+              },
+            ],
+          },
+          {
+            category: "Jurisdiction",
+            questions: [
+              {
+                id: "jurisdiction",
+                text: "Governing law",
+                type: "radio",
+                options: ["Quebec", "Ontario", "Other"],
+              },
+            ],
+          },
+        ],
+        service: [
+          {
+            category: "Parties",
+            questions: [
+              {
+                id: "provider",
+                text: "Service Provider name",
+                type: "text",
+              },
+              {
+                id: "client",
+                text: "Client name",
+                type: "text",
+              },
+            ],
+          },
+          {
+            category: "Services",
+            questions: [
+              {
+                id: "services",
+                text: "Description of services",
+                type: "textarea",
+              },
+            ],
+          },
+          {
+            category: "Fees",
+            questions: [
+              {
+                id: "fee_amount",
+                text: "Service fee",
+                type: "text",
+              },
+              {
+                id: "payment_schedule",
+                text: "Payment schedule",
+                type: "radio",
+                options: ["One-time", "Monthly", "Quarterly", "Annual"],
+              },
+            ],
+          },
+          {
+            category: "Term",
+            questions: [
+              {
+                id: "term_length",
+                text: "Contract term",
+                type: "radio",
+                options: ["1 month", "6 months", "1 year", "2 years"],
+              },
+            ],
+          },
+        ],
+        tos: [
+          {
+            category: "Service Details",
+            questions: [
+              {
+                id: "service_name",
+                text: "Name of service/website/app",
+                type: "text",
+              },
+              {
+                id: "operator",
+                text: "Operating company/individual",
+                type: "text",
+              },
+            ],
+          },
+          {
+            category: "User Obligations",
+            questions: [
+              {
+                id: "age_requirement",
+                text: "Minimum age requirement",
+                type: "radio",
+                options: ["13+", "16+", "18+"],
+              },
+              {
+                id: "account_required",
+                text: "Is account registration required?",
+                type: "radio",
+                options: ["Yes", "No"],
+              },
+            ],
+          },
+          {
+            category: "Content",
+            questions: [
+              {
+                id: "user_content",
+                text: "Do users upload content?",
+                type: "radio",
+                options: ["Yes", "No"],
+              },
+              {
+                id: "content_rights",
+                text: "Who owns user-generated content?",
+                type: "radio",
+                options: ["User", "Platform", "Shared"],
+              },
+            ],
+          },
+          {
+            category: "Jurisdiction",
+            questions: [
+              {
+                id: "jurisdiction",
+                text: "Governing law",
+                type: "radio",
+                options: ["Quebec", "Ontario", "Other"],
+              },
+            ],
+          },
+        ],
+        custom: [
+          {
+            category: "Custom Contract Details",
+            questions: [
+              {
+                id: "custom_description",
+                text: "Describe the contract you need. Include parties, purpose, obligations, payment terms, duration, confidentiality, termination, governing law, and any special clauses.",
+                type: "textarea",
+              },
+            ],
+          },
+        ],
+      };
+
+      // Add contract length question to all contract types
+      const generationPreferenceCategory = {
+        category: "Generation Preferences",
+        questions: [
+          {
+            id: "contract_length",
+            text: "How detailed should the generated contract be?",
+            type: "radio",
+            options: ["Short", "Medium", "Long"],
+          },
+        ],
+      };
+
+      Object.keys(contractQuestions).forEach((type) => {
+        const alreadyExists = contractQuestions[type].some((category) =>
+          category.questions.some((q) => q.id === "contract_length"),
+        );
+
+        if (!alreadyExists) {
+          contractQuestions[type].push({
+            category: generationPreferenceCategory.category,
+            questions: [...generationPreferenceCategory.questions],
+          });
+        }
+      });
+
+      const contractNames = {
+        employment: "Employment Agreement",
+        contractor: "Contractor Agreement",
+        nda: "NDA (Non-Disclosure Agreement)",
+        service: "Service Agreement",
+        tos: "Terms of Service",
+        custom: "Custom Contract",
+      };
+
+      function goToStep(step) {
+        document.getElementById("step-1-content").classList.add("hidden");
+        document.getElementById("step-2-content").classList.add("hidden");
+        document.getElementById("step-3-content").classList.add("hidden");
+
+        document
+          .getElementById(`step-${step}-content`)
+          .classList.remove("hidden");
+        document
+          .getElementById(`step-${step}-content`)
+          .classList.add("fade-in");
+
+        for (let i = 1; i <= 3; i++) {
+          const stepEl = document.getElementById(`step-${i}`);
+          stepEl.classList.remove(
+            "step-active",
+            "step-completed",
+            "bg-gray-200",
+            "text-gray-600",
+          );
+
+          if (i < step) {
+            stepEl.classList.add("step-completed");
+          } else if (i === step) {
+            stepEl.classList.add("step-active");
+          } else {
+            stepEl.classList.add("bg-gray-200", "text-gray-600");
+          }
+        }
+
+        currentStep = step;
+
+        if (step === 3) {
+          updateSummary();
+        }
+      }
+
+      function selectContractType(type) {
+        selectedContractType = type;
+        answers = {};
+        generatedContractText = "";
+
+        loadQuestions(type);
+        goToStep(2);
+      }
+
+      function loadQuestions(type) {
+        const container = document.getElementById("questions-container");
+        const questions = contractQuestions[type];
+
+        const selectedTypeName = contractNames[type] || "Contract";
+        const summaryTypeEl = document.getElementById("summary-type");
+        if (summaryTypeEl) summaryTypeEl.textContent = selectedTypeName;
+
+        const selectedTypeNameEl =
+          document.getElementById("selected-type-name");
+        if (selectedTypeNameEl) {
+          selectedTypeNameEl.textContent = selectedTypeName;
+        }
+
+        const totalQuestions = questions.reduce(
+          (sum, cat) => sum + cat.questions.length,
+          0,
+        );
+
+        const totalCountEl = document.getElementById("total-count");
+        if (totalCountEl) totalCountEl.textContent = totalQuestions;
+
+        let html = "";
+
+        questions.forEach((category, catIndex) => {
+          html += `
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 mb-4">
+          <h3 class="text-base font-semibold text-gray-800 mb-4">${category.category}</h3>
+          <div class="space-y-4">
+      `;
+
+          category.questions.forEach((q, qIndex) => {
+            const qId = `q_${catIndex}_${qIndex}`;
+            html += `
+          <div class="question-item">
+            <label class="block text-sm font-medium text-gray-700 mb-1">${q.text}</label>
+        `;
+
+            if (q.type === "text" || q.type === "date") {
+              html += `
+            <input
+              id="${qId}"
+              data-key="${q.id}"
+              type="${q.type}"
+              class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+              onchange="updateProgress()"
+            />
+          `;
+            } else if (q.type === "textarea") {
+              const textareaPlaceholder =
+                q.id === "custom_description"
+                  ? "Write the full details of the custom contract you want..."
+                  : "Enter your answer...";
+
+              html += `
+            <textarea
+              id="${qId}"
+              data-key="${q.id}"
+              rows="6"
+              placeholder="${textareaPlaceholder}"
+              class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+              onchange="updateProgress()"
+            ></textarea>
+          `;
+            } else if (q.type === "radio" && q.options) {
+              html += `<div class="mt-1 flex flex-wrap gap-2">`;
+
+              q.options.forEach((opt, optIndex) => {
+                html += `
+              <label class="cursor-pointer">
+                <input
+                  type="radio"
+                  id="${qId}_opt_${optIndex}"
+                  name="${q.id}"
+                  value="${opt}"
+                  class="peer sr-only"
+                  onchange="updateProgress()"
+                />
+                <span class="inline-flex items-center px-3 py-1.5 rounded-full border border-gray-200 text-xs font-medium text-gray-700 bg-white transition-all duration-200 hover:bg-gray-50 peer-checked:bg-blue-600 peer-checked:border-blue-600 peer-checked:text-white peer-checked:shadow-sm">
+                  ${opt}
+                </span>
+              </label>
+            `;
+              });
+
+              html += `</div>`;
+            }
+
+            html += `</div>`;
+          });
+
+          html += `</div></div>`;
+        });
+
+        container.innerHTML = html;
+        updateProgress();
+      }
+
+      function updateProgress() {
+        const total = document.querySelectorAll(".question-item").length;
+        let answered = 0;
+
+        let nonRadioAnswered = 0;
+        document
+          .querySelectorAll(
+            '.question-item input:not([type="radio"]), .question-item textarea',
+          )
+          .forEach((el) => {
+            if (el.value && el.value.trim()) {
+              nonRadioAnswered++;
+            }
+          });
+
+        answered = nonRadioAnswered;
+
+        const radioGroups = new Set();
+        document
+          .querySelectorAll('.question-item input[type="radio"]')
+          .forEach((input) => {
+            radioGroups.add(input.name);
+          });
+
+        radioGroups.forEach((name) => {
+          if (document.querySelector(`input[name="${name}"]:checked`)) {
+            answered++;
+          }
+        });
+
+        document.getElementById("progress-count").textContent = answered;
+      }
+
+      function updateSummary() {
+        document.getElementById("summary-type").textContent =
+          contractNames[selectedContractType] || "-";
+
+        document.getElementById("summary-answered").textContent =
+          document.getElementById("progress-count").textContent +
+          "/" +
+          document.getElementById("total-count").textContent;
+      }
+
+      function escapeHTML(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function extractContractText(result) {
+        let text = "";
+
+        if (!result) return "";
+
+        if (typeof result === "string") {
+          text = result;
+        } else if (result.contract) {
+          text = result.contract;
+        } else if (result.content) {
+          text = result.content;
+        } else if (result.text) {
+          text = result.text;
+        } else {
+          text = JSON.stringify(result, null, 2);
+        }
+
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed.contract) text = parsed.contract;
+          else if (parsed.content) text = parsed.content;
+          else if (parsed.text) text = parsed.text;
+        } catch (e) {}
+
+        return String(text)
+          .replace(/\\n/g, "\n")
+          .replace(/\\t/g, "\t")
+          .replace(/\r\n/g, "\n")
+          .replace(/\n{3,}/g, "\n\n")
+          .trim();
+      }
+
+      function normalizeContractText(text) {
+        if (!text) return "";
+
+        let cleaned = String(text)
+          .replace(/\\n/g, "\n")
+          .replace(/\\t/g, "\t")
+          .replace(/\r\n/g, "\n")
+          .replace(/[ \t]+\n/g, "\n")
+          .replace(/\n{3,}/g, "\n\n")
+          .trim();
+
+        cleaned = cleaned
+          .replace(/\s+(\d+\.\s+[A-Z][A-Za-z\s,&/()\-]{2,})/g, "\n\n$1")
+          .replace(/\s+(\d+\.\d+\s+[A-Z][A-Za-z\s,&/()\-]{2,})/g, "\n$1")
+          .replace(/\s+(WHEREAS,)/g, "\n\n$1")
+          .replace(/\s+(NOW, THEREFORE,)/g, "\n\n$1")
+          .replace(/\s+(IN WITNESS WHEREOF,)/g, "\n\n$1");
+
+        return cleaned.trim();
+      }
+
+      function isMainTitle(line, index) {
+        if (index !== 0) return false;
+        const trimmed = line.trim();
+
+        return (
+          trimmed.length <= 90 &&
+          trimmed === trimmed.toUpperCase() &&
+          /AGREEMENT|CONTRACT|TERMS|NDA|DISCLOSURE|SERVICE|EMPLOYMENT|CONTRACTOR/.test(
+            trimmed,
+          )
+        );
+      }
+
+      function isSectionTitle(line) {
+        const trimmed = line.trim();
+        return /^(\d+\.|ARTICLE\s+\d+|SECTION\s+\d+)/i.test(trimmed);
+      }
+
+      function isSubsectionTitle(line) {
+        const trimmed = line.trim();
+        return /^\d+\.\d+/.test(trimmed);
+      }
+
+      function renderContractHTML(text) {
+        const normalized = normalizeContractText(text);
+        const lines = normalized
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean);
+
+        if (!lines.length) return "";
+
+        let html = "";
+
+        lines.forEach((line, index) => {
+          const safeLine = escapeHTML(line);
+
+          if (isMainTitle(line, index)) {
+            html += `<div class="contract-title">${safeLine}</div>`;
+          } else if (isSubsectionTitle(line)) {
+            html += `<div class="contract-subsection-title">${safeLine}</div>`;
+          } else if (isSectionTitle(line)) {
+            html += `<div class="contract-section-title">${safeLine}</div>`;
+          } else if (/^(IN WITNESS WHEREOF|SIGNATURES|SIGNED BY)/i.test(line)) {
+            html += `<div class="contract-section-title">${safeLine}</div>`;
+          } else if (/_{5,}|Name:|Title:|Date:/i.test(line)) {
+            html += `<div class="contract-paragraph signature-block">${safeLine}</div>`;
+          } else {
+            html += `<p class="contract-paragraph">${safeLine}</p>`;
+          }
+        });
+
+        return html;
+      }
+
+      async function generateContract() {
+        const btn = document.getElementById("generate-btn");
+        const contentEl = document.getElementById("contract-content");
+        const container = document.getElementById("generated-contract");
+
+        if (!contentEl || !container || !btn) return;
+        if (!selectedContractType) {
+          alert("Please select a contract type first.");
+          return;
+        }
+
+        const collectedAnswers = {};
+
+        document.querySelectorAll("[data-key]").forEach((el) => {
+          const key = el.dataset.key;
+          if (el.value && el.value.trim()) {
+            collectedAnswers[key] = el.value.trim();
+          }
+        });
+
+        const allQuestions = contractQuestions[selectedContractType] || [];
+        allQuestions.forEach((cat) => {
+          cat.questions.forEach((q) => {
+            if (q.type === "radio") {
+              const checked = document.querySelector(
+                `input[name="${q.id}"]:checked`,
+              );
+              if (checked) {
+                collectedAnswers[q.id] = checked.value;
+              }
+            }
+          });
+        });
+
+        btn.disabled = true;
+        btn.textContent = "Generating...";
+        btn.classList.add("opacity-70", "cursor-wait");
+
+        try {
+          const result = await API.generateContract({
+            contract_type: selectedContractType,
+            details: collectedAnswers,
+            language: "English",
+            tone: "formal",
+            context:
+              selectedContractType === "custom"
+                ? collectedAnswers.custom_description || ""
+                : "",
+          });
+
+          generatedContractText = extractContractText(result);
+          generatedContractText = normalizeContractText(generatedContractText);
+
+          contentEl.innerHTML = renderContractHTML(generatedContractText);
+
+          container.classList.remove("hidden");
+          container.scrollIntoView({ behavior: "smooth", block: "start" });
+        } catch (err) {
+          alert(
+            "Failed to generate contract: " + (err.message || "Unknown error"),
+          );
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Generate Contract with AI";
+          btn.classList.remove("opacity-70", "cursor-wait");
+        }
+      }
+
+      function copyContract() {
+        const content =
+          generatedContractText ||
+          document.getElementById("contract-content").innerText;
+
+        if (!content || !content.trim()) {
+          alert("No contract available to copy.");
+          return;
+        }
+
+        navigator.clipboard.writeText(content);
+        alert("✅ Contract copied to clipboard!");
+      }
+
+      function downloadContract() {
+        const content =
+          generatedContractText ||
+          document.getElementById("contract-content").innerText;
+
+        if (!content || !content.trim()) {
+          alert("No contract available to download.");
+          return;
+        }
+
+        if (!window.jspdf || !window.jspdf.jsPDF) {
+          alert(
+            "PDF library is not loaded. Please check your internet connection or jsPDF script.",
+          );
+          return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+          orientation: "p",
+          unit: "mm",
+          format: "a4",
+        });
+
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
+
+        const marginLeft = 18;
+        const marginRight = 18;
+        const marginTop = 20;
+        const marginBottom = 18;
+        const usableWidth = pageWidth - marginLeft - marginRight;
+
+        const lines = normalizeContractText(content).split("\n");
+        let y = marginTop;
+
+        function addNewPageIfNeeded(extraSpace = 8) {
+          if (y + extraSpace > pageHeight - marginBottom) {
+            doc.addPage();
+            y = marginTop;
+          }
+        }
+
+        function addWrappedText(text, options = {}) {
+          const {
+            fontSize = 11,
+            fontStyle = "normal",
+            align = "left",
+            spacingAfter = 4,
+            lineHeight = 6,
+          } = options;
+
+          doc.setFont("times", fontStyle);
+          doc.setFontSize(fontSize);
+
+          const wrappedLines = doc.splitTextToSize(text, usableWidth);
+
+          wrappedLines.forEach((line) => {
+            addNewPageIfNeeded(lineHeight);
+
+            if (align === "center") {
+              doc.text(line, pageWidth / 2, y, { align: "center" });
+            } else {
+              doc.text(line, marginLeft, y);
+            }
+
+            y += lineHeight;
+          });
+
+          y += spacingAfter;
+        }
+
+        lines.forEach((rawLine, index) => {
+          const line = rawLine.trim();
+
+          if (!line) {
+            y += 3;
+            return;
+          }
+
+          if (isMainTitle(line, index)) {
+            addWrappedText(line, {
+              fontSize: 15,
+              fontStyle: "bold",
+              align: "center",
+              spacingAfter: 10,
+              lineHeight: 7,
+            });
+          } else if (isSubsectionTitle(line)) {
+            addWrappedText(line, {
+              fontSize: 11.5,
+              fontStyle: "bold",
+              spacingAfter: 3,
+              lineHeight: 6,
+            });
+          } else if (
+            isSectionTitle(line) ||
+            /^(IN WITNESS WHEREOF|SIGNATURES|SIGNED BY)/i.test(line)
+          ) {
+            y += 2;
+            addWrappedText(line, {
+              fontSize: 12.5,
+              fontStyle: "bold",
+              spacingAfter: 4,
+              lineHeight: 6.5,
+            });
+          } else {
+            addWrappedText(line, {
+              fontSize: 11,
+              fontStyle: "normal",
+              spacingAfter: 3,
+              lineHeight: 6,
+            });
+          }
+        });
+
+        const fileName = `${selectedContractType || "generated"}_contract_${Date.now()}.pdf`;
+        doc.save(fileName);
+      }
+    </script>
+  </body>
+</html>

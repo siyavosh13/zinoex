@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contract Review - Zinoex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .upload-zone {
+        transition: all 0.3s ease;
+        border: 2px dashed #d1d5db;
+      }
+      .upload-zone:hover {
+        border-color: #22c55e;
+        background: #f0fdf4;
+      }
+      .upload-zone.dragover {
+        border-color: #22c55e;
+        background: #dcfce7;
+        transform: scale(1.02);
+      }
+      .analysis-card {
+        transition: all 0.3s ease;
+      }
+      .analysis-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .typing-animation::after {
+        content: "|";
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+      .progress-ring {
+        transform: rotate(-90deg);
+      }
+      .progress-ring circle {
+        transition: stroke-dashoffset 0.5s ease;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Navigation Bar -->
+    <nav
+      class="bg-white border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/90"
+    >
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <!-- Logo -->
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg"
+            >
+              <svg
+                class="w-7 h-7 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h1
+                class="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent"
+              >
+                Zinoex
+              </h1>
+              <p class="text-xs text-gray-500 -mt-1">Contract Review</p>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="hidden md:flex items-center gap-6">
+            <a
+              href="zinoex-index.html"
+              class="text-gray-700 hover:text-indigo-600 font-medium transition-colors"
+              >Home</a
+            >
+            <a href="#" class="text-indigo-600 font-semibold"
+              >Contract Review</a
+            >
+            <a
+              href="#"
+              class="text-gray-700 hover:text-indigo-600 font-medium transition-colors"
+              >Dashboard</a
+            >
+          </div>
+
+          <!-- User Menu -->
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg"
+            >
+              <span class="text-white font-bold text-sm">JD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+      <!-- Header Section -->
+      <div class="mb-12 fade-in">
+        <div class="flex items-center gap-4 mb-4">
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-xl"
+          >
+            <svg
+              class="w-9 h-9 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-4xl font-bold text-gray-900">Contract Review</h1>
+            <p class="text-lg text-gray-600">
+              AI-powered contract analysis and risk detection
+            </p>
+          </div>
+        </div>
+
+        <!-- Features Pills -->
+        <div class="flex flex-wrap gap-3 mt-6">
+          <div
+            class="px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-semibold flex items-center gap-2"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+            AI Analysis
+          </div>
+          <div
+            class="px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-semibold flex items-center gap-2"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              ></path>
+            </svg>
+            Risk Detection
+          </div>
+          <div
+            class="px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-semibold flex items-center gap-2"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            Compliance Check
+          </div>
+          <div
+            class="px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-semibold flex items-center gap-2"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
+            </svg>
+            Instant Results
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Section -->
+      <div id="upload-section" class="mb-12 fade-in">
+        <div
+          class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-8"
+        >
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Upload Your Contract
+          </h2>
+
+          <!-- Upload Methods Tabs -->
+          <div class="flex gap-4 mb-6 border-b border-gray-200">
+            <button
+              onclick="switchTab('file')"
+              id="tab-file"
+              class="px-6 py-3 font-semibold text-green-600 border-b-2 border-green-600"
+            >
+              File Upload
+            </button>
+            <button
+              onclick="switchTab('text')"
+              id="tab-text"
+              class="px-6 py-3 font-semibold text-gray-500 hover:text-gray-700"
+            >
+              Paste Text
+            </button>
+          </div>
+
+          <!-- File Upload Zone -->
+          <div id="file-upload-zone" class="upload-zone">
+            <div
+              class="upload-zone rounded-2xl p-12 text-center cursor-pointer"
+              onclick="document.getElementById('file-input').click()"
+              ondragover="
+                event.preventDefault();
+                event.currentTarget.classList.add('dragover');
+              "
+              ondragleave="event.currentTarget.classList.remove('dragover')"
+              ondrop="handleDrop(event)"
+            >
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg"
+              >
+                <svg
+                  class="w-10 h-10 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  ></path>
+                </svg>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Drop your contract here
+              </h3>
+              <p class="text-gray-600 mb-4">or click to browse</p>
+              <p class="text-sm text-gray-500">
+                Supports PDF, DOCX, DOC (Max 10MB)
+              </p>
+
+              <input
+                type="file"
+                id="file-input"
+                class="hidden"
+                accept=".pdf,.doc,.docx"
+                onchange="handleFileSelect(event)"
+              />
+            </div>
+
+            <!-- Selected File Display -->
+            <div
+              id="selected-file"
+              class="hidden mt-6 p-4 bg-green-50 rounded-xl border-2 border-green-200"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-900" id="file-name">
+                      contract.pdf
+                    </p>
+                    <p class="text-sm text-gray-600" id="file-size">2.4 MB</p>
+                  </div>
+                </div>
+                <button
+                  onclick="removeFile()"
+                  class="text-red-600 hover:text-red-700"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Input Zone -->
+          <div id="text-input-zone" class="hidden">
+            <textarea
+              id="contract-text"
+              class="w-full h-64 p-6 border-2 border-gray-300 rounded-2xl focus:border-green-500 focus:outline-none resize-none"
+              placeholder="Paste your contract text here...
+
+Example:
+This Agreement is entered into as of [Date] between [Party A] and [Party B]..."
+            ></textarea>
+            <p class="text-sm text-gray-500 mt-2">
+              <span id="char-count">0</span> characters
+            </p>
+          </div>
+
+          <!-- Analyze Button -->
+          <button
+            onclick="startAnalysis()"
+            class="mt-6 w-full py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+              ></path>
+            </svg>
+            Analyze Contract
+          </button>
+        </div>
+      </div>
+
+      <!-- Analysis Progress -->
+      <div id="analysis-progress" class="hidden mb-12 fade-in">
+        <div
+          class="bg-white rounded-3xl shadow-xl border-2 border-green-200 p-8"
+        >
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900">
+                Analyzing Contract
+              </h2>
+              <p class="text-gray-600">AI is reviewing your contract...</p>
+            </div>
+            <!-- Progress Ring -->
+            <div class="relative w-20 h-20">
+              <svg class="w-20 h-20 progress-ring">
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="36"
+                  stroke="#e5e7eb"
+                  stroke-width="8"
+                  fill="none"
+                ></circle>
+                <circle
+                  id="progress-circle"
+                  cx="40"
+                  cy="40"
+                  r="36"
+                  stroke="#22c55e"
+                  stroke-width="8"
+                  fill="none"
+                  stroke-dasharray="226.19"
+                  stroke-dashoffset="226.19"
+                ></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span
+                  id="progress-percent"
+                  class="text-lg font-bold text-gray-900"
+                  >0%</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Steps -->
+          <div class="space-y-3">
+            <div
+              id="step-1"
+              class="flex items-center gap-3 p-4 bg-gray-50 rounded-xl"
+            >
+              <div
+                class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center"
+              >
+                <span class="text-white font-bold">1</span>
+              </div>
+              <span class="text-gray-600"
+                >Extracting text from document...</span
+              >
+            </div>
+            <div
+              id="step-2"
+              class="flex items-center gap-3 p-4 bg-gray-50 rounded-xl"
+            >
+              <div
+                class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center"
+              >
+                <span class="text-white font-bold">2</span>
+              </div>
+              <span class="text-gray-600">Analyzing clauses and terms...</span>
+            </div>
+            <div
+              id="step-3"
+              class="flex items-center gap-3 p-4 bg-gray-50 rounded-xl"
+            >
+              <div
+                class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center"
+              >
+                <span class="text-white font-bold">3</span>
+              </div>
+              <span class="text-gray-600">Identifying risks and issues...</span>
+            </div>
+            <div
+              id="step-4"
+              class="flex items-center gap-3 p-4 bg-gray-50 rounded-xl"
+            >
+              <div
+                class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center"
+              >
+                <span class="text-white font-bold">4</span>
+              </div>
+              <span class="text-gray-600">Generating recommendations...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Analysis Results -->
+<div id="analysis-results" class="hidden space-y-8 fade-in">
+
+  <!-- Summary Card -->
+  <div class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-8">
+
+    <div class="flex items-start justify-between mb-6">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">Analysis Complete</h2>
+        <p class="text-gray-600">AI Review Results</p>
+      </div>
+
+      <button onclick="downloadReport()"
+        class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+        Download Report
+      </button>
+    </div>
+
+    <!-- Overall Score -->
+    <div class="grid md:grid-cols-3 gap-6 mb-6">
+
+      <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl border-2 border-green-200">
+        <div class="flex items-center gap-3 mb-2">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span class="font-semibold text-green-900">Overall Score</span>
+        </div>
+        <p id="overall-score" class="text-4xl font-bold text-green-600"></p>
+      </div>
+
+      <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-2xl border-2 border-yellow-200">
+        <div class="flex items-center gap-3 mb-2">
+          <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+            </path>
+          </svg>
+          <span class="font-semibold text-yellow-900">Risks Found</span>
+        </div>
+        <p id="risk-count" class="text-4xl font-bold text-yellow-600"></p>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-2xl border-2 border-blue-200">
+        <div class="flex items-center gap-3 mb-2">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+            </path>
+          </svg>
+          <span class="font-semibold text-blue-900">Suggestions</span>
+        </div>
+        <p id="suggestion-count" class="text-4xl font-bold text-blue-600"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="analysis-card bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-8">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Contract Summary</h3>
+    <p id="summary-text" class="text-gray-700 leading-relaxed"></p>
+  </div>
+
+  <!-- Risks -->
+  <div class="analysis-card bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-8">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Identified Risks</h3>
+    <div id="risks-list" class="space-y-4"></div>
+  </div>
+
+  <!-- Suggestions -->
+  <div class="analysis-card bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-8">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">AI Recommendations</h3>
+    <div id="suggestions-list" class="space-y-4"></div>
+  </div>
+
+</div>
+
+    <script src="api.js"></script>
+<script>
+// Tab Switching
+function switchTab(tab) {
+  const fileTab = document.getElementById("tab-file");
+  const textTab = document.getElementById("tab-text");
+  const fileZone = document.getElementById("file-upload-zone");
+  const textZone = document.getElementById("text-input-zone");
+
+  if (tab === "file") {
+    fileTab.className =
+      "px-6 py-3 font-semibold text-green-600 border-b-2 border-green-600";
+    textTab.className =
+      "px-6 py-3 font-semibold text-gray-500 hover:text-gray-700";
+    fileZone.classList.remove("hidden");
+    textZone.classList.add("hidden");
+  } else {
+    textTab.className =
+      "px-6 py-3 font-semibold text-green-600 border-b-2 border-green-600";
+    fileTab.className =
+      "px-6 py-3 font-semibold text-gray-500 hover:text-gray-700";
+    textZone.classList.remove("hidden");
+    fileZone.classList.add("hidden");
+  }
+}
+
+// Character Count
+document.getElementById("contract-text")?.addEventListener("input", function (e) {
+  document.getElementById("char-count").textContent = e.target.value.length;
+});
+
+// File Handling
+let selectedFile = null;
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  if (file) {
+    selectedFile = file;
+    document.getElementById("selected-file").classList.remove("hidden");
+    document.getElementById("file-name").textContent = file.name;
+    document.getElementById("file-size").textContent =
+      (file.size / 1024 / 1024).toFixed(2) + " MB";
+  }
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  event.currentTarget.classList.remove("dragover");
+
+  const file = event.dataTransfer.files[0];
+  if (file) {
+    selectedFile = file;
+    document.getElementById("selected-file").classList.remove("hidden");
+    document.getElementById("file-name").textContent = file.name;
+    document.getElementById("file-size").textContent =
+      (file.size / 1024 / 1024).toFixed(2) + " MB";
+  }
+}
+
+function removeFile() {
+  selectedFile = null;
+  document.getElementById("selected-file").classList.add("hidden");
+  document.getElementById("file-input").value = "";
+}
+
+// Progress Animation
+function runProgressAnimation(callback) {
+  document.getElementById("upload-section").classList.add("hidden");
+  document.getElementById("analysis-progress").classList.remove("hidden");
+
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += 5;
+    document.getElementById("progress-percent").textContent = progress + "%";
+
+    const circle = document.getElementById("progress-circle");
+    const offset = 226.19 - (226.19 * progress) / 100;
+    circle.style.strokeDashoffset = offset;
+
+    if (progress >= 100) {
+      clearInterval(interval);
+      setTimeout(callback, 400);
+    }
+  }, 80);
+}
+
+// Render Results
+function renderResults(data) {
+  console.log("DATA RECEIVED:", data);
+
+  document.getElementById("analysis-progress").classList.add("hidden");
+  document.getElementById("analysis-results").classList.remove("hidden");
+  document.getElementById("overall-score").textContent = data.overall_score ?? "-";
+
+  const summary = document.getElementById("summary-text");
+
+  if (!data.summary) {
+    summary.textContent = "-";
+  } else if (typeof data.summary === "string") {
+    summary.textContent = data.summary;
+  } else if (typeof data.summary === "object") {
+
+    let obligationsHtml = "-";
+
+    if (Array.isArray(data.summary.obligations)) {
+      obligationsHtml =
+        "<ul>" +
+        data.summary.obligations.map(item => `<li>${item}</li>`).join("") +
+        "</ul>";
+    } else if (typeof data.summary.obligations === "object") {
+      obligationsHtml =
+        "<ul>" +
+        Object.entries(data.summary.obligations)
+          .map(([key, value]) => `<li><strong>${key}:</strong> ${value}</li>`)
+          .join("") +
+        "</ul>";
+    } else if (typeof data.summary.obligations === "string") {
+      obligationsHtml = data.summary.obligations;
+    }
+
+    summary.innerHTML = `
+      <p><strong>Contract Number:</strong> ${data.summary.contract_number ?? "-"}</p>
+      <p><strong>Date:</strong> ${data.summary.date ?? "-"}</p>
+      <p><strong>Subject:</strong> ${data.summary.subject ?? "-"}</p>
+      <div>
+        <strong>Obligations:</strong>
+        ${obligationsHtml}
+      </div>
+    `;
+  } else {
+    summary.textContent = "-";
+  }
+
+  // ✅ ریسک‌ها
+  const risks = Array.isArray(data.risks) ? data.risks : [];
+  document.getElementById("risk-count").textContent = risks.length;
+  const risksList = document.getElementById("risks-list");
+  risksList.innerHTML = "";
+
+  risks.forEach(risk => {
+    const text =
+      risk.text ||
+      risk.description ||
+      risk.risk ||
+      risk.message ||
+      JSON.stringify(risk);
+
+    const card = `
+      <div class="p-4 rounded-2xl bg-red-50 border border-red-200 shadow-sm text-red-700 flex gap-3 items-start">
+        <span class="text-yellow-500 text-xl">⚠️</span>
+        <p class="leading-relaxed">${text}</p>
+      </div>
+    `;
+    risksList.insertAdjacentHTML("beforeend", card);
+  });
+
+  // ✅ پیشنهادها
+  const suggestions = Array.isArray(data.suggestions) ? data.suggestions : [];
+  document.getElementById("suggestion-count").textContent = suggestions.length;
+  const suggestionsList = document.getElementById("suggestions-list");
+  suggestionsList.innerHTML = "";
+
+  suggestions.forEach(suggestion => {
+    const text =
+      suggestion.text ||
+      suggestion.description ||
+      suggestion.suggestion ||
+      suggestion.message ||
+      JSON.stringify(suggestion);
+
+    const card = `
+      <div class="p-4 rounded-2xl bg-blue-50 border border-blue-200 shadow-sm text-blue-700 flex gap-3 items-start">
+        <span class="text-yellow-500 text-xl">💡</span>
+        <p class="leading-relaxed">${text}</p>
+      </div>
+    `;
+    suggestionsList.insertAdjacentHTML("beforeend", card);
+  });
+
+  // اسکرول بالا بعد از نمایش
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// MAIN ANALYSIS FUNCTION
+async function startAnalysis() {
+  const fileInput = document.getElementById("file-input");
+  const textInput = document.getElementById("contract-text");
+  const isFileTab = !document
+    .getElementById("file-upload-zone")
+    .classList.contains("hidden");
+
+  if (isFileTab) {
+    const file = fileInput.files[0] || selectedFile;
+    if (!file) {
+      alert("Please select a file.");
+      return;
+    }
+
+    runProgressAnimation(async () => {
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("language", "en");
+
+        const data = await apiRequest("/contracts/review-file", {
+          method: "POST",
+          body: formData
+        });
+
+        renderResults(data);
+      } catch (err) {
+        console.error("Analysis error:", err);
+        alert("Analysis failed: " + err.message);
+        document.getElementById("analysis-progress").classList.add("hidden");
+        document.getElementById("upload-section").classList.remove("hidden");
+      }
+    });
+  } else {
+    const text = textInput?.value?.trim();
+    if (!text || text.length < 50) {
+      alert("Please enter at least 50 characters.");
+      return;
+    }
+
+    runProgressAnimation(async () => {
+      try {
+        const data = await apiRequest("/contracts/review", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contract_text: text, language: "en" })
+        });
+
+        renderResults(data);
+      } catch (err) {
+        console.error("Analysis error:", err);
+        alert("Analysis failed: " + err.message);
+        document.getElementById("analysis-progress").classList.add("hidden");
+        document.getElementById("upload-section").classList.remove("hidden");
+      }
+    });
+  }
+}
+
+function resetAnalysis() {
+  document.getElementById("analysis-results").classList.add("hidden");
+  document.getElementById("upload-section").classList.remove("hidden");
+  removeFile();
+  const textEl = document.getElementById("contract-text");
+  if (textEl) textEl.value = "";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function downloadReport() {
+  alert("PDF Report download would start here in production.");
+}
+</script>
+  </body>
+</html>

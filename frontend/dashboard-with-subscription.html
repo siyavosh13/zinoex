@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard -ZinoEx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="./dashboard.js"></script>
+
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .gradient-pro {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .gradient-free {
+        background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+      }
+    </style>
+  </head>
+
+  <body class="bg-white">
+    <!-- Header -->
+    <header class="bg-white border-b sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg"
+            >
+              <svg
+                class="w-7 h-7 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h1
+                class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+              >
+                ZinoEx
+              </h1>
+              <p class="text-xs text-gray-500">AI Governance Platform</p>
+            </div>
+          </div>
+
+          <!-- User Menu -->
+          <div class="flex items-center gap-3">
+            <!-- Profile Button (جایگزین زنگوله) -->
+            <button
+              onclick="window.location.href='/profile.html'"
+              class="flex items-center gap-1 p-2 rounded-lg hover:bg-gray-100"
+              title="Profile"
+            >
+              <svg
+                class="w-6 h-6 text-gray-700"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5.121 17.804A9.003 9.003 0 0112 15c2.21 0 4.21.804 5.879 2.137M15 10a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
+            </button>
+
+            <div
+              class="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+              onclick="window.location.href='/frontend/profile.html'"
+            >
+              <div
+                class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center"
+              >
+                <span class="text-white text-sm font-bold">JD</span>
+              </div>
+              <span
+                class="text-sm font-semibold text-gray-700"
+                id="user-email"
+              ></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <!-- Header Section -->
+      <div class="mb-8 fade-in">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">Dashboard</h2>
+        <p class="text-gray-600">
+          Welcome back! Here's what's happening with your platform.
+        </p>
+
+        <!-- dynamic user plan -->
+        <div class="mt-2 text-gray-500 text-sm">
+          <span>Plan:</span>
+          <span id="user-plan" class="font-semibold text-gray-700"></span>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-6">
+        <!-- Left Column -->
+        <div class="lg:col-span-8 space-y-6">
+          <!-- Stats -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in">
+            <!-- Stat 1 -->
+            <div
+              class="bg-white border-2 border-gray-200 rounded-2xl p-6 card-hover"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="text-green-600 text-sm font-semibold">+12%</span>
+              </div>
+              <h3
+                id="stat-contracts"
+                class="text-2xl font-bold text-gray-800 mb-1"
+              >
+                0
+              </h3>
+              <p class="text-sm text-gray-600">Contracts Generated</p>
+            </div>
+
+            <!-- Stat 2 -->
+            <div
+              class="bg-white border-2 border-gray-200 rounded-2xl p-6 card-hover"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="text-green-600 text-sm font-semibold">+8%</span>
+              </div>
+              <h3
+                id="stat-reviews"
+                class="text-2xl font-bold text-gray-800 mb-1"
+              >
+                0
+              </h3>
+              <p class="text-sm text-gray-600">Reviews Completed</p>
+            </div>
+
+            <!-- Stat 3 -->
+            <div
+              class="bg-white border-2 border-gray-200 rounded-2xl p-6 card-hover"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="text-green-600 text-sm font-semibold">+15%</span>
+              </div>
+              <h3
+                id="stat-blockchain"
+                class="text-2xl font-bold text-gray-800 mb-1"
+              >
+                0
+              </h3>
+              <p class="text-sm text-gray-600">Blockchain Transactions</p>
+            </div>
+
+            <!-- Stat 4 (باقی همان است چون data ندارد) -->
+            <div
+              class="bg-white border-2 border-gray-200 rounded-2xl p-6 card-hover"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-orange-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="text-green-600 text-sm font-semibold">+23%</span>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-1">231</h3>
+              <p class="text-sm text-gray-600">Risk Assessments</p>
+            </div>
+          </div>
+
+          <!-- Modules Grid (بدون تغییر) -->
+          <!-- ... -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="lg:col-span-4 space-y-6">
+          <!-- Subscription (بدون تغییر کامل گذاشتم) -->
+          <!-- ... -->
+
+          <!-- Recent Activity (دینامیک) -->
+          <div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Recent Activity
+            </h3>
+            <div class="bg-white border-2 border-gray-200 rounded-2xl p-6">
+              <div id="activity-list" class="space-y-4"></div>
+
+              <button
+                class="w-full mt-4 text-sm text-indigo-600 hover:text-indigo-700 font-semibold"
+              >
+                View All Activity →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function togglePlan() {
+        const proPlan = document.getElementById("plan-pro");
+        const freePlan = document.getElementById("plan-free");
+        const toggleText = document.getElementById("toggle-text");
+
+        if (proPlan.classList.contains("hidden")) {
+          proPlan.classList.remove("hidden");
+          freePlan.classList.add("hidden");
+          toggleText.textContent = "Free";
+        } else {
+          proPlan.classList.add("hidden");
+          freePlan.classList.remove("hidden");
+          toggleText.textContent = "Pro";
+        }
+      }
+    </script>
+  </body>
+</html>
+</html>

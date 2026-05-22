@@ -1,0 +1,574 @@
+{
+  "Employment": [
+    {
+      "category": "Parties",
+      "questions": [
+        {
+          "text": "What is the employer's full legal name and address?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "What is the employee's full name?",
+          "type": "text",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Role & Responsibilities",
+      "questions": [
+        {
+          "text": "What is the job title?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "Describe the main duties and responsibilities.",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Compensation",
+      "questions": [
+        {
+          "text": "What is the salary or hourly rate?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "What is the pay frequency?",
+          "type": "radio",
+          "options": ["Weekly", "Bi-weekly", "Monthly"]
+        }
+      ]
+    },
+    {
+      "category": "Benefits",
+      "questions": [
+        {
+          "text": "What benefits are included?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Work Schedule",
+      "questions": [
+        {
+          "text": "What are the expected working hours?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "Is remote work allowed?",
+          "type": "radio",
+          "options": ["Yes", "No", "Hybrid"]
+        }
+      ]
+    },
+    {
+      "category": "Term & Termination",
+      "questions": [
+        {
+          "text": "Is this a fixed-term or at-will employment?",
+          "type": "radio",
+          "options": ["At-will", "Fixed-term"]
+        },
+        {
+          "text": "What is the notice period required for termination?",
+          "type": "text",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Confidentiality & IP",
+      "questions": [
+        {
+          "text": "Will the employee have access to confidential information?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        },
+        {
+          "text": "Who owns intellectual property created during employment?",
+          "type": "radio",
+          "options": ["Employer", "Employee", "Shared"]
+        }
+      ]
+    },
+    {
+      "category": "Non-Compete & Non-Solicitation",
+      "questions": [
+        {
+          "text": "Should there be a non-compete clause?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        },
+        {
+          "text": "Should there be a non-solicitation clause?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        }
+      ]
+    },
+    {
+      "category": "Governing Law",
+      "questions": [
+        {
+          "text": "What is the governing law and jurisdiction?",
+          "type": "text",
+          "options": []
+        }
+      ]
+    }
+  ],
+
+  "NDA": [
+    {
+      "category": "Parties & Relationship",
+      "questions": [
+        {
+          "text": "Who are the parties entering the NDA?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "What is the nature of the relationship?",
+          "type": "radio",
+          "options": [
+            "Potential partnership",
+            "Employment",
+            "Investment",
+            "Vendor relationship",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Purpose",
+      "questions": [
+        {
+          "text": "What is the general purpose for sharing confidential information?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Scope of Confidential Information",
+      "questions": [
+        {
+          "text": "What types of information will be considered confidential?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Obligations & Use",
+      "questions": [
+        {
+          "text": "How can the receiving party use the confidential information?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Term & Survival",
+      "questions": [
+        {
+          "text": "How long will the confidentiality obligations last?",
+          "type": "radio",
+          "options": ["1 year", "2 years", "3 years", "5 years", "Indefinitely"]
+        }
+      ]
+    },
+    {
+      "category": "Exclusions",
+      "questions": [
+        {
+          "text": "Should there be standard exclusions (public information, independently developed, etc.)?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        }
+      ]
+    },
+    {
+      "category": "Remedies & Disputes",
+      "questions": [
+        {
+          "text": "What remedies are available in case of breach?",
+          "type": "radio",
+          "options": ["Injunctive relief", "Monetary damages", "Both"]
+        },
+        {
+          "text": "What is the governing law and jurisdiction?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "Do you prefer arbitration or court litigation for dispute resolution?",
+          "type": "radio",
+          "options": [
+            "Arbitration",
+            "Court litigation",
+            "Mediation first, then arbitration"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "Service": [
+    {
+      "category": "Parties",
+      "questions": [
+        {
+          "text": "Who is the service provider?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "Who is the customer or client?",
+          "type": "text",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Services Provided",
+      "questions": [
+        {
+          "text": "How would you describe the services to be provided?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Fees & Payment",
+      "questions": [
+        {
+          "text": "How will the customer be charged?",
+          "type": "radio",
+          "options": ["Subscription", "One-time fee", "Usage based", "Other"]
+        },
+        {
+          "text": "What is the billing frequency?",
+          "type": "radio",
+          "options": ["Monthly", "Quarterly", "Annually", "One-time"]
+        }
+      ]
+    },
+    {
+      "category": "Service Levels & Support",
+      "questions": [
+        {
+          "text": "Are there any service level or uptime requirements?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        },
+        {
+          "text": "What type of customer support will be provided?",
+          "type": "radio",
+          "options": [
+            "Email only",
+            "Phone & Email",
+            "24/7 Support",
+            "Dedicated account manager"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Data & Privacy",
+      "questions": [
+        {
+          "text": "Will the provider handle or store any personal or sensitive data?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        }
+      ]
+    },
+    {
+      "category": "Term & Termination",
+      "questions": [
+        {
+          "text": "Is this agreement ongoing or for a fixed term?",
+          "type": "radio",
+          "options": ["Ongoing", "Fixed term"]
+        },
+        {
+          "text": "What are the termination rights for each party?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Liability & Indemnity",
+      "questions": [
+        {
+          "text": "Should liability be limited (e.g., cap on damages)?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        },
+        {
+          "text": "Are there any specific indemnification obligations?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Governing Law & Disputes",
+      "questions": [
+        {
+          "text": "What is the governing law and jurisdiction?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "Do you prefer arbitration or court litigation for dispute resolution?",
+          "type": "radio",
+          "options": [
+            "Arbitration",
+            "Court litigation",
+            "Mediation first, then arbitration"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "Contractor": [
+    {
+      "category": "Parties",
+      "questions": [
+        {
+          "text": "What is the client's full legal name?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "What is the contractor's full legal name or business name?",
+          "type": "text",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Scope of Work",
+      "questions": [
+        {
+          "text": "Describe the work or deliverables expected from the contractor.",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Compensation",
+      "questions": [
+        {
+          "text": "How will the contractor be compensated?",
+          "type": "radio",
+          "options": ["Fixed fee", "Hourly rate", "Milestone-based", "Other"]
+        },
+        {
+          "text": "What is the payment schedule?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Independent Contractor Status",
+      "questions": [
+        {
+          "text": "Should the agreement explicitly state the contractor is not an employee?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        }
+      ]
+    },
+    {
+      "category": "Intellectual Property",
+      "questions": [
+        {
+          "text": "Who owns the work product created by the contractor?",
+          "type": "radio",
+          "options": ["Client", "Contractor", "Shared"]
+        }
+      ]
+    },
+    {
+      "category": "Confidentiality",
+      "questions": [
+        {
+          "text": "Should there be a confidentiality clause?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        }
+      ]
+    },
+    {
+      "category": "Term & Termination",
+      "questions": [
+        {
+          "text": "What is the project duration or contract term?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "What are the termination conditions?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Governing Law & Disputes",
+      "questions": [
+        {
+          "text": "What is the governing law and jurisdiction?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "Do you prefer arbitration or court litigation for dispute resolution?",
+          "type": "radio",
+          "options": ["Arbitration", "Court litigation", "No preference"]
+        }
+      ]
+    }
+  ],
+
+  "ToS": [
+    {
+      "category": "Service Description",
+      "questions": [
+        {
+          "text": "What product or service does this ToS apply to?",
+          "type": "text",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "User Eligibility",
+      "questions": [
+        {
+          "text": "Are there any age or jurisdictional restrictions for users?",
+          "type": "text",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "User Obligations",
+      "questions": [
+        {
+          "text": "What responsibilities or rules must users follow when using the service?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Fees & Billing (if applicable)",
+      "questions": [
+        {
+          "text": "Does the service involve paid plans or subscriptions?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        },
+        {
+          "text": "What is the billing and renewal structure?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Content & IP",
+      "questions": [
+        {
+          "text": "Can users upload or create content on the platform?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        },
+        {
+          "text": "Who owns the content created by users?",
+          "type": "radio",
+          "options": [
+            "User owns content",
+            "Service provider owns content",
+            "Depends on content type"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Privacy & Data Usage",
+      "questions": [
+        {
+          "text": "Will you link to a separate Privacy Policy?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        },
+        {
+          "text": "Are there any special data use or sharing practices to highlight?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Disclaimers & Limitation of Liability",
+      "questions": [
+        {
+          "text": "Do you want strong disclaimers (e.g., 'as is' and no warranties)?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        },
+        {
+          "text": "Should there be a cap on liability?",
+          "type": "radio",
+          "options": ["Yes", "No"]
+        }
+      ]
+    },
+    {
+      "category": "Termination & Suspension",
+      "questions": [
+        {
+          "text": "Under what conditions can user accounts be terminated or suspended?",
+          "type": "textarea",
+          "options": []
+        }
+      ]
+    },
+    {
+      "category": "Governing Law & Disputes",
+      "questions": [
+        {
+          "text": "What is the governing law and jurisdiction?",
+          "type": "text",
+          "options": []
+        },
+        {
+          "text": "Do you prefer arbitration or court litigation for dispute resolution?",
+          "type": "radio",
+          "options": ["Arbitration", "Court litigation", "No preference"]
+        }
+      ]
+    }
+  ]
+}

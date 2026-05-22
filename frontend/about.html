@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>About ZinoEx</title>
+    <style>
+      :root {
+        --bg: #020617;
+        --bg2: #0f172a;
+        --card: rgba(2, 6, 23, 0.55);
+        --text: #e5e7eb;
+        --muted: rgba(226, 232, 240, 0.8);
+        --border: rgba(148, 163, 184, 0.25);
+        --accent: #22c55e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        background: radial-gradient(circle at top, var(--bg2) 0, var(--bg) 45%);
+        color: var(--text);
+      }
+      header {
+        background: rgba(15, 23, 42, 0.94);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(18px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+        gap: 18px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: #ecfdf3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+      }
+      .logo-text-main {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .logo-text-sub {
+        font-size: 11px;
+        color: #9ca3af;
+      }
+      .nav-links a {
+        color: #cbd5f5;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 13px;
+      }
+      .nav-links a:hover {
+        background: rgba(15, 23, 42, 0.9);
+        color: #f9fafb;
+      }
+      main {
+        padding: 34px 0 60px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        background: var(--card);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 22px;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 30px;
+        letter-spacing: -0.02em;
+        color: #f9fafb;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.9;
+        font-size: 14px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(34, 197, 94, 0.12);
+        border: 1px solid rgba(34, 197, 94, 0.25);
+        color: #b7f7d6;
+        font-size: 12px;
+        width: fit-content;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav class="nav">
+          <div class="logo">
+            <div class="logo-icon">Z</div>
+            <div>
+              <div class="logo-text-main">ZinoEx</div>
+              <div class="logo-text-sub">Your AI contract assistant</div>
+            </div>
+          </div>
+          <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="badge">About</div>
+        <div style="height: 12px"></div>
+        <div class="card">
+          <h1>About ZinoEx</h1>
+          <p>
+            ZinoEx is a legal-tech platform designed to support legal
+            professionals and businesses in drafting, reviewing, and managing
+            contracts more efficiently.
+          </p>
+          <p>
+            By combining AI-assisted analysis with structured legal logic,
+            ZinoEx supports contract-related decision-making through practical
+            use cases such as contract drafting, contract review, and document
+            integrity verification. The platform places particular emphasis on
+            transparency, risk awareness, and compliance-oriented design.
+          </p>
+          <p>
+            ZinoEx is built to assist decision-making, reduce friction in
+            routine legal tasks, and improve access to structured legal insights
+            — while keeping legal responsibility where it belongs: with the user
+            and their legal counsel.
+          </p>
+          <p>
+            ZinoEx also offers an AI Risk Assessment module that supports
+            organizations in identifying and documenting potential legal,
+            ethical, and operational risks related to the use of AI systems, in
+            line with emerging governance and responsible AI principles.
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

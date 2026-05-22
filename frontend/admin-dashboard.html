@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZinoEx Admin</title>
+    <script src="api.js"></script>
+    <script src="admin-dashboard.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Inter, system-ui, Arial;
+      }
+
+      body {
+        background: #f5f7fb;
+        display: flex;
+        min-height: 100vh;
+        color: #1f2937;
+      }
+
+      /* SIDEBAR */
+
+      .sidebar {
+        width: 240px;
+        background: white;
+        border-right: 1px solid #e5e7eb;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .menu-item {
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: #374151;
+        transition: all 0.2s;
+      }
+
+      .menu-item:hover {
+        background: #f3f4f6;
+      }
+
+      .menu-item.active {
+        background: #eef2ff;
+        color: #4f46e5;
+        font-weight: 600;
+      }
+
+      /* MAIN */
+
+      .main {
+        flex: 1;
+        padding: 30px;
+        overflow: auto;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .page-title {
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .btn {
+        background: #4f46e5;
+        border: none;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .btn.red {
+        background: #ef4444;
+      }
+      .btn.gray {
+        background: #6b7280;
+      }
+      .btn.green {
+        background: #10b981;
+      }
+
+      /* CARDS */
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+      }
+
+      .card-title {
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .card-value {
+        font-size: 28px;
+        font-weight: 700;
+        margin-top: 5px;
+      }
+
+      /* TABLE */
+
+      .table {
+        width: 100%;
+        background: white;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+      }
+
+      th {
+        background: #fafafa;
+        font-weight: 600;
+      }
+
+      .actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      /* FORMS */
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        margin-bottom: 8px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 900px) {
+        .sidebar {
+          position: fixed;
+          left: -240px;
+          top: 0;
+          height: 100%;
+          z-index: 1000;
+          transition: 0.3s;
+        }
+
+        .sidebar.open {
+          left: 0;
+        }
+
+        .main {
+          padding: 20px;
+        }
+
+        .menu-toggle {
+          display: block;
+          cursor: pointer;
+          font-size: 20px;
+        }
+      }
+
+      @media (min-width: 901px) {
+        .menu-toggle {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sidebar" id="sidebar">
+      <div class="logo">ZinoEx Admin</div>
+
+      <div class="menu-item active" data-page="dashboard">Dashboard</div>
+      <div class="menu-item" data-page="users">Users</div>
+      <div class="menu-item" data-page="plans">Plans</div>
+      <div class="menu-item" data-page="subscriptions">Subscriptions</div>
+      <div class="menu-item" data-page="modules">Modules</div>
+      <div class="menu-item" data-page="files">Files</div>
+      <div class="menu-item" data-page="index">Index Content</div>
+      <div class="menu-item" data-page="activity">Activity Logs</div>
+      <div class="menu-item" id="logout">Logout</div>
+    </div>
+
+    <div class="main">
+      <div class="header">
+        <div>
+          <span class="menu-toggle" onclick="toggleSidebar()">☰</span>
+          <span class="page-title" id="title">Dashboard</span>
+        </div>
+      </div>
+
+      <div id="content"></div>
+    </div>
+
+    <script>
+      /* =======================
+     AUTH CHECK (CRITICAL)
+  ========================== */
+
+      async function checkAuth() {
+        const token = localStorage.getItem("access_token");
+        if (!token) {
+          location.href = "login.html";
+          return;
+        }
+
+        try {
+          const res = await fetch("http://localhost:8000/api/auth/me", {
+            method: "GET",
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          });
+
+          if (!res.ok) throw new Error("Invalid");
+
+          const user = await res.json();
+          console.log("Authenticated user:", user);
+        } catch (err) {
+          console.warn("Auth failed:", err);
+          localStorage.removeItem("access_token");
+          location.href = "login.html";
+        }
+      }
+
+      // اجرای چک احراز هویت قبل از لود داشبورد
+      checkAuth();
+
+      /* SIDEBAR */
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
+      }
+
+      /* NAVIGATION */
+
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        item.onclick = () => {
+          document
+            .querySelectorAll(".menu-item")
+            .forEach((i) => i.classList.remove("active"));
+          item.classList.add("active");
+
+          let page = item.dataset.page;
+          if (!page) return;
+
+          document.getElementById("title").innerText = item.innerText;
+          loadPage(page);
+        };
+      });
+
+      /* ROUTER */
+
+      function loadPage(page) {
+        if (page === "dashboard") loadDashboard();
+        if (page === "users") loadUsers();
+        if (page === "plans") loadPlans();
+        if (page === "subscriptions") loadSubs();
+        if (page === "modules") loadModules();
+        if (page === "files") loadFiles();
+        if (page === "index") loadIndex();
+        if (page === "activity") loadActivity();
+      }
+
+      /* DASHBOARD */
+
+      async function loadDashboard() {
+        let stats = await AdminAPI.getStats();
+
+        document.getElementById("content").innerHTML = `
+
+<div class="card-grid">
+
+<div class="card">
+<div class="card-title">Users</div>
+<div class="card-value">${stats.users}</div>
+</div>
+
+<div class="card">
+<div class="card-title">Plans</div>
+<div class="card-value">${stats.plans}</div>
+</div>
+
+<div class="card">
+<div class="card-title">Modules</div>
+<div class="card-value">${stats.modules}</div>
+</div>
+
+<div class="card">
+<div class="card-title">Files</div>
+<div class="card-value">${stats.files}</div>
+</div>
+
+<div class="card">
+<div class="card-title">Subscriptions</div>
+<div class="card-value">${stats.subscriptions}</div>
+</div>
+
+<div class="card">
+<div class="card-title">Activity</div>
+<div class="card-value">${stats.activity}</div>
+</div>
+
+</div>
+`;
+      }
+
+      /* USERS */
+
+      async function loadUsers() {
+        let users = await AdminAPI.listUsers();
+
+        let rows = users
+          .map(
+            (u) => `
+<tr>
+<td>${u.email}</td>
+<td>${u.subscription || "-"}</td>
+<td>${u.status}</td>
+<td class="actions">
+<button class="btn gray" onclick="makeAdmin('${u.id}')">Admin</button>
+<button class="btn" onclick="suspendUser('${u.id}')">Suspend</button>
+<button class="btn green" onclick="activateUser('${u.id}')">Activate</button>
+<button class="btn red" onclick="deleteUser('${u.id}')">Delete</button>
+</td>
+</tr>
+`,
+          )
+          .join("");
+
+        document.getElementById("content").innerHTML = `
+
+<div class="table">
+
+<table>
+
+<thead>
+<tr>
+<th>Email</th>
+<th>Subscription</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>${rows}</tbody>
+
+</table>
+
+</div>
+`;
+      }
+
+      /* USERS ACTIONS */
+
+      async function makeAdmin(id) {
+        await AdminAPI.makeAdmin(id);
+        loadUsers();
+      }
+
+      async function suspendUser(id) {
+        await AdminAPI.suspendUser(id);
+        loadUsers();
+      }
+
+      async function activateUser(id) {
+        await AdminAPI.activateUser(id);
+        loadUsers();
+      }
+
+      async function deleteUser(id) {
+        if (!confirm("Delete user?")) return;
+        await AdminAPI.deleteUser(id);
+        loadUsers();
+      }
+
+      /* PLANS */
+
+      async function loadPlans() {
+        let plans = await AdminAPI.listPlans();
+
+        let rows = plans
+          .map(
+            (p) => `
+<tr>
+<td>${p.name}</td>
+<td>${p.price}</td>
+<td>${p.tokens}</td>
+<td class="actions">
+<button class="btn green" onclick="enablePlan('${p.id}')">Enable</button>
+<button class="btn gray" onclick="disablePlan('${p.id}')">Disable</button>
+<button class="btn red" onclick="deletePlan('${p.id}')">Delete</button>
+</td>
+</tr>
+`,
+          )
+          .join("");
+
+        document.getElementById("content").innerHTML = `
+
+<button class="btn" onclick="showCreatePlan()">Create Plan</button>
+
+<div style="height:10px"></div>
+
+<div class="table">
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Price</th>
+<th>Tokens</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>${rows}</tbody>
+
+</table>
+</div>
+
+<div id="planForm"></div>
+
+`;
+      }
+
+      /* CREATE PLAN */
+
+      function showCreatePlan() {
+        document.getElementById("planForm").innerHTML = `
+
+<div class="card" style="margin-top:15px">
+
+<input id="planName" placeholder="name">
+<input id="planPrice" placeholder="price">
+<input id="planTokens" placeholder="tokens">
+
+<button class="btn" onclick="createPlan()">Save</button>
+
+</div>
+`;
+      }
+
+      async function createPlan() {
+        let data = {
+          name: planName.value,
+          price: Number(planPrice.value),
+          tokens: Number(planTokens.value),
+        };
+
+        await AdminAPI.createPlan(data);
+
+        loadPlans();
+      }
+
+      /* PLAN ACTIONS */
+
+      async function deletePlan(id) {
+        await AdminAPI.deletePlan(id);
+        loadPlans();
+      }
+
+      async function enablePlan(id) {
+        await AdminAPI.enablePlan(id);
+        loadPlans();
+      }
+
+      async function disablePlan(id) {
+        await AdminAPI.disablePlan(id);
+        loadPlans();
+      }
+
+      /* SUBSCRIPTIONS */
+
+      async function loadSubs() {
+        let subs = await AdminAPI.listSubscriptions();
+
+        let rows = subs
+          .map(
+            (s) => `
+<tr>
+<td>${s.user_email}</td>
+<td>${s.plan}</td>
+<td>${s.status}</td>
+<td>
+<button class="btn red" onclick="cancelSub('${s.id}')">Cancel</button>
+</td>
+</tr>
+`,
+          )
+          .join("");
+
+        document.getElementById("content").innerHTML = `
+
+<div class="table">
+
+<table>
+
+<thead>
+<tr>
+<th>User</th>
+<th>Plan</th>
+<th>Status</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>${rows}</tbody>
+
+</table>
+
+</div>
+`;
+      }
+
+      async function cancelSub(id) {
+        await AdminAPI.cancelSubscription(id);
+        loadSubs();
+      }
+
+      /* MODULES */
+
+      async function loadModules() {
+        let mods = await AdminAPI.listModules();
+
+        let rows = mods
+          .map(
+            (m) => `
+<tr>
+<td>${m.name}</td>
+<td>${m.description}</td>
+<td>${m.is_active}</td>
+<td>
+<button class="btn red" onclick="deleteModule('${m.id}')">Delete</button>
+</td>
+</tr>
+`,
+          )
+          .join("");
+
+        document.getElementById("content").innerHTML = `
+
+<div class="table">
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Active</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>${rows}</tbody>
+
+</table>
+
+</div>
+`;
+      }
+
+      async function deleteModule(id) {
+        await AdminAPI.deleteModule(id);
+        loadModules();
+      }
+
+      /* FILES */
+
+      async function loadFiles() {
+        let files = await AdminAPI.listFiles();
+
+        let rows = files
+          .map(
+            (f) => `
+<tr>
+<td>${f.name}</td>
+<td>
+<button class="btn red" onclick="deleteFile('${f.id}')">Delete</button>
+</td>
+</tr>
+`,
+          )
+          .join("");
+
+        document.getElementById("content").innerHTML = `
+
+<input type="file" id="fileUpload">
+<button class="btn" onclick="uploadFile()">Upload</button>
+
+<div style="height:10px"></div>
+
+<div class="table">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>${rows}</tbody>
+
+</table>
+
+</div>
+`;
+      }
+
+      async function uploadFile() {
+        let file = document.getElementById("fileUpload").files[0];
+        await AdminAPI.uploadFile(file);
+        loadFiles();
+      }
+
+      async function deleteFile(id) {
+        await AdminAPI.deleteFile(id);
+        loadFiles();
+      }
+
+      /* INDEX CONTENT */
+
+      async function loadIndex() {
+        let data = await AdminAPI.getIndexContent();
+
+        let html = "";
+
+        for (let key in data) {
+          html += `
+<label>${key}</label>
+<textarea id="field_${key}">${data[key]}</textarea>
+`;
+        }
+
+        html += `<button class="btn" onclick="saveIndex()">Save</button>`;
+
+        document.getElementById("content").innerHTML = html;
+      }
+
+      async function saveIndex() {
+        let data = {};
+        document.querySelectorAll("textarea").forEach((t) => {
+          data[t.id.replace("field_", "")] = t.value;
+        });
+
+        await AdminAPI.updateIndexContent(data);
+
+        alert("Saved");
+      }
+
+      /* ACTIVITY */
+
+      async function loadActivity() {
+        let logs = await AdminAPI.listActivity();
+
+        let rows = logs
+          .map(
+            (l) => `
+<tr>
+<td>${l.action}</td>
+<td>${l.created_at}</td>
+</tr>
+`,
+          )
+          .join("");
+
+        document.getElementById("content").innerHTML = `
+
+<button class="btn red" onclick="clearActivity()">Clear Logs</button>
+
+<div style="height:10px"></div>
+
+<div class="table">
+
+<table>
+
+<thead>
+<tr>
+<th>Action</th>
+<th>Date</th>
+</tr>
+</thead>
+
+<tbody>${rows}</tbody>
+
+</table>
+
+</div>
+`;
+      }
+
+      async function clearActivity() {
+        await AdminAPI.clearActivity();
+        loadActivity();
+      }
+
+      /* LOGOUT */
+
+      document.getElementById("logout").onclick = () => {
+        localStorage.removeItem("access_token");
+        location.href = "login.html";
+      };
+
+      /* INIT */
+
+      loadDashboard();
+    </script>
+  </body>
+</html>

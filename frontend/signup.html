@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - ZinoEx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-white min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+      <h2 class="text-2xl font-bold mb-6 text-center">Create Account</h2>
+
+      <form id="signup-form" class="space-y-4">
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          class="w-full p-3 border rounded"
+          required
+        />
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Password (min 8 characters)"
+          class="w-full p-3 border rounded"
+          required
+        />
+
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
+
+    <!-- API FILE -->
+    <script src="./api.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("signup-form");
+        const button = form.querySelector("button");
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value.trim();
+
+          // Basic validation
+          if (!email || !password) {
+            alert("Please fill all required fields.");
+            return;
+          }
+
+          if (password.length < 8) {
+            alert("Password must be at least 8 characters.");
+            return;
+          }
+
+          try {
+            button.disabled = true;
+            button.innerText = "Creating account...";
+
+            // ✅ FIXED: send as object
+            const response = await API.signup({
+              email: email,
+              password: password,
+            });
+
+            console.log("Signup success:", response);
+
+            sessionStorage.setItem("signup_email", email);
+
+            window.location.href = "verify-email.html";
+          } catch (error) {
+            console.error("Signup error:", error);
+
+            // ✅ Better error display (handles FastAPI validation errors)
+            let message = "Registration failed.";
+
+            if (error.message) {
+              message = error.message;
+            }
+
+            alert(message);
+          } finally {
+            button.disabled = false;
+            button.innerText = "Sign Up";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

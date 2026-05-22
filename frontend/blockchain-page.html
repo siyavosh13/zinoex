@@ -1,0 +1,1316 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blockchain - ZinoEx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .pulse-ring {
+        animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+      }
+      @keyframes pulseRing {
+        0% {
+          transform: scale(0.95);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(0.95);
+          opacity: 1;
+        }
+      }
+      .blockchain-grid {
+        background-image:
+          linear-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Header -->
+    <header class="bg-white border-b sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center"
+            >
+              <svg
+                class="w-7 h-7 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h1
+                class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+              >
+                ZinoEx
+              </h1>
+              <p class="text-xs text-gray-500">Blockchain Module</p>
+            </div>
+          </div>
+          <button
+            onclick="window.history.back()"
+            class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-800"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              ></path>
+            </svg>
+            <span class="font-semibold">Back</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <!-- Page Header -->
+      <div class="mb-8 fade-in">
+        <div class="flex items-center gap-3 mb-4">
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg"
+          >
+            <svg
+              class="w-9 h-9 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-3xl font-bold text-gray-800">
+              Blockchain Integration
+            </h2>
+            <p class="text-gray-600">
+              Secure, immutable contract storage and verification
+            </p>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+          <div class="bg-white border-2 border-gray-200 rounded-xl p-4">
+            <div class="text-2xl font-bold text-gray-800">231</div>
+            <div class="text-sm text-gray-600">Contracts on Chain</div>
+          </div>
+          <div class="bg-white border-2 border-gray-200 rounded-xl p-4">
+            <div class="text-2xl font-bold text-green-600">100%</div>
+            <div class="text-sm text-gray-600">Verified</div>
+          </div>
+          <div class="bg-white border-2 border-gray-200 rounded-xl p-4">
+            <div class="text-2xl font-bold text-gray-800">0</div>
+            <div class="text-sm text-gray-600">Failed Transactions</div>
+          </div>
+          <div class="bg-white border-2 border-gray-200 rounded-xl p-4">
+            <div class="text-2xl font-bold text-orange-600">2.3s</div>
+            <div class="text-sm text-gray-600">Avg. Confirmation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-2 mb-6 overflow-x-auto">
+        <button
+          onclick="switchTab('embed')"
+          id="tab-embed"
+          class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl font-semibold whitespace-nowrap"
+        >
+          Embed Contract
+        </button>
+        <button
+          onclick="switchTab('verify')"
+          id="tab-verify"
+          class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 whitespace-nowrap"
+        >
+          Verify Contract
+        </button>
+        <button
+          onclick="switchTab('history')"
+          id="tab-history"
+          class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 whitespace-nowrap"
+        >
+          Blockchain History
+        </button>
+      </div>
+
+      <!-- Tab: Embed Contract -->
+      <div id="content-embed" class="fade-in">
+        <div class="grid lg:grid-cols-2 gap-8">
+          <!-- Left: Upload Form -->
+          <div class="space-y-6">
+            <div class="bg-white border-2 border-gray-200 rounded-2xl p-8">
+              <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                Embed Contract to Blockchain
+              </h3>
+
+              <!-- Step 1: Select Contract -->
+              <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-3"
+                  >Step 1: Select Contract</label
+                >
+                <select
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none"
+                >
+                  <option>Employment Agreement - #12345</option>
+                  <option>NDA Agreement - #12344</option>
+                  <option>Service Agreement - #12343</option>
+                </select>
+                <p class="text-xs text-gray-500 mt-2">
+                  Or upload a new contract
+                </p>
+              </div>
+
+              <!-- Step 2: Upload File -->
+              <!-- Step 2: Upload File -->
+              <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-3">
+                  Step 2: Upload Contract File
+                </label>
+
+                <input
+                  type="file"
+                  id="contract-file-input"
+                  accept=".pdf,.docx"
+                  class="hidden"
+                />
+
+                <div
+                  id="upload-box"
+                  class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-orange-500 transition-colors cursor-pointer"
+                >
+                  <svg
+                    class="w-12 h-12 text-gray-400 mx-auto mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+
+                  <p class="text-gray-600 font-semibold mb-2" id="upload-text">
+                    Drop your contract here
+                  </p>
+                  <p class="text-sm text-gray-500">or click to browse</p>
+                  <p class="text-xs text-gray-400 mt-2">
+                    Supported: PDF, DOCX (Max 10MB)
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 3: Add Signers -->
+              <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-3">
+                  Step 3: Add Contract Signers
+                </label>
+
+                <div class="space-y-3">
+                  <div class="flex gap-2">
+                    <input
+                      id="signer-email-input"
+                      type="email"
+                      placeholder="Email address"
+                      class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none"
+                    />
+                    <button
+                      id="add-signer-btn"
+                      type="button"
+                      class="px-4 py-3 bg-gray-100 rounded-xl hover:bg-gray-200"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 4v16m8-8H4"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- لیست signer ها (خالی، بدون ایمیل فیک) -->
+                  <div id="signers-list" class="space-y-2"></div>
+                </div>
+              </div>
+
+              <button
+                onclick="embedContract()"
+                class="w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl font-bold hover:shadow-xl transition-all"
+              >
+                <span class="flex items-center justify-center gap-2">
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                    ></path>
+                  </svg>
+                  Embed to Blockchain
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Info & Benefits -->
+          <div class="space-y-6">
+            <!-- How it Works -->
+            <div
+              class="bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-200 rounded-2xl p-8"
+            >
+              <h3 class="text-xl font-bold text-gray-800 mb-6">
+                How Blockchain Embedding Works
+              </h3>
+              <div class="space-y-4">
+                <div class="flex gap-4">
+                  <div
+                    class="w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center flex-shrink-0 font-bold"
+                  >
+                    1
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800 mb-1">
+                      Contract Hashing
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Your contract is converted to a unique cryptographic hash
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div
+                    class="w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center flex-shrink-0 font-bold"
+                  >
+                    2
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800 mb-1">
+                      Blockchain Storage
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Hash is permanently stored on the blockchain
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div
+                    class="w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center flex-shrink-0 font-bold"
+                  >
+                    3
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800 mb-1">
+                      Notification
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      All signers are notified of the embedded contract
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div
+                    class="w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center flex-shrink-0 font-bold"
+                  >
+                    4
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800 mb-1">
+                      Tamper Detection
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Any changes are automatically detected and reported
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="bg-white border-2 border-gray-200 rounded-2xl p-8">
+              <h3 class="text-xl font-bold text-gray-800 mb-6">Benefits</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <svg
+                    class="w-5 h-5 text-green-600 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700"
+                    ><strong>Immutable:</strong> Cannot be altered once
+                    stored</span
+                  >
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    class="w-5 h-5 text-green-600 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700"
+                    ><strong>Transparent:</strong> All changes are tracked</span
+                  >
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    class="w-5 h-5 text-green-600 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700"
+                    ><strong>Secure:</strong> Cryptographic protection</span
+                  >
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg
+                    class="w-5 h-5 text-green-600 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700"
+                    ><strong>Instant Alerts:</strong> Signers notified of
+                    changes</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Verify Contract -->
+      <div id="content-verify" class="hidden">
+  <div class="grid lg:grid-cols-2 gap-8">
+
+    <!-- Left: Verification Form -->
+    <div class="space-y-6">
+      <div class="bg-white border-2 border-gray-200 rounded-2xl p-8">
+
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">
+          Verify Contract Integrity
+        </h3>
+
+        <!-- Method 1: Upload File -->
+        <div class="mb-8">
+          <label class="block text-sm font-semibold text-gray-700 mb-3">
+            Method 1: Upload Contract File
+          </label>
+
+          <!-- IMPORTANT: Hidden File Input -->
+          <input
+            type="file"
+            id="verify-file-input"
+            class="hidden"
+          />
+
+          <!-- Upload Box -->
+          <div
+            onclick="document.getElementById('verify-file-input').click()"
+            class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-green-500 transition-colors cursor-pointer"
+          >
+            <svg
+              class="w-12 h-12 text-gray-400 mx-auto mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+
+            <p class="text-gray-600 font-semibold mb-2">
+              Drop contract to verify
+            </p>
+
+            <p class="text-sm text-gray-500">
+              We'll check if it matches blockchain records
+            </p>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="relative mb-8">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+
+          <div class="relative flex justify-center text-sm">
+            <span class="px-4 bg-white text-gray-500">OR</span>
+          </div>
+        </div>
+
+        <!-- Method 2: Hash -->
+        <div class="mb-8">
+          <label class="block text-sm font-semibold text-gray-700 mb-3">
+            Method 2: Enter Contract Hash
+          </label>
+
+          <input
+            type="text"
+            id="contract-hash-input"
+            placeholder="Enter SHA-256 contract hash"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 focus:outline-none"
+          />
+        </div>
+
+        <!-- Verify Button -->
+        <button
+          onclick="verifyContract()"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors"
+        >
+          Verify on Blockchain
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Right: Verification Result -->
+    <div id="verification-result" class="bg-white border-2 border-gray-200 rounded-2xl p-8 hidden">
+
+      <h3 class="text-xl font-bold text-gray-800 mb-6">
+        Verification Result
+      </h3>
+
+      <div class="space-y-4">
+
+        <div>
+          <p class="text-sm text-gray-500">Contract Hash</p>
+          <p id="result-hash" class="font-mono text-sm text-gray-800"></p>
+        </div>
+
+        <div>
+          <p class="text-sm text-gray-500">Block Number</p>
+          <p id="result-block" class="text-gray-800"></p>
+        </div>
+
+        <div>
+          <p class="text-sm text-gray-500">Timestamp</p>
+          <p id="result-time" class="text-gray-800"></p>
+        </div>
+
+        <div>
+          <p class="text-sm text-gray-500">Signers</p>
+          <p id="result-signers" class="text-gray-800"></p>
+        </div>
+
+        <div class="pt-4">
+          <p id="result-status" class="font-bold text-lg"></p>
+        </div>
+
+        <!-- Tampered Warning -->
+        <div
+          id="tampered-warning"
+          class="hidden bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg"
+        >
+          ⚠️ Warning: This contract appears to be tampered or does not match the blockchain record.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+              <!-- Method 2: Contract Hash -->
+
+              <div class="mb-8">
+                <label class="block text-sm font-semibold text-gray-700 mb-3"
+                  >Method 2: Enter Contract Hash</label
+                >
+                <input
+                  id="contract-hash-input"
+                  type="text"
+                  placeholder="0x7f8a3b2c..."
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none font-mono text-sm"
+                />
+              </div>
+
+              <!-- Verify Button -->
+              <button
+                onclick="verifyContract()"
+                class="w-full px-6 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-bold hover:shadow-xl transition-all"
+              >
+                <span class="flex items-center justify-center gap-2">
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  Verify on Blockchain
+                </span>
+              </button>
+            </div>
+
+            <!-- Verification Result (Hidden by default) -->
+            <!-- Verification Result -->
+            <div
+              id="verification-result"
+              class="hidden bg-white border-2 border-green-500 rounded-2xl p-8"
+            >
+              <div class="flex items-start gap-4 mb-6">
+                <div
+                  class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 pulse-ring"
+                >
+                  <svg
+                    class="w-8 h-8 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3
+                    id="result-status-title"
+                    class="text-2xl font-bold text-green-600 mb-2"
+                  >
+                    ✓ Verified!
+                  </h3>
+                  <p id="result-status-text" class="text-gray-600">
+                    Contract matches blockchain record
+                  </p>
+                </div>
+              </div>
+
+              <div class="space-y-3 mb-6">
+                <div class="flex justify-between py-2 border-b">
+                  <span class="text-gray-600">Contract Hash:</span>
+                  <span
+                    id="result-hash"
+                    class="font-mono text-sm text-gray-800 break-all"
+                    >-</span
+                  >
+                </div>
+                <div class="flex justify-between py-2 border-b">
+                  <span class="text-gray-600">Block Number:</span>
+                  <span id="result-block" class="font-semibold text-gray-800"
+                    >-</span
+                  >
+                </div>
+                <div class="flex justify-between py-2 border-b">
+                  <span class="text-gray-600">Timestamp:</span>
+                  <span id="result-time" class="text-gray-800">-</span>
+                </div>
+                <div class="flex justify-between py-2 border-b">
+                  <span class="text-gray-600">Status:</span>
+                  <span
+                    id="result-status"
+                    class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold"
+                    >Verified</span
+                  >
+                </div>
+                <div class="flex justify-between py-2">
+                  <span class="text-gray-600">Signers:</span>
+                  <span id="result-signers" class="text-gray-800">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tampered Warning (Example) -->
+            <div
+              id="tampered-warning"
+              class="hidden bg-white border-2 border-red-500 rounded-2xl p-8"
+            >
+              <div class="flex items-start gap-4 mb-6">
+                <div
+                  class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-8 h-8 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-red-600 mb-2">
+                    ⚠ Tampered!
+                  </h3>
+                  <p class="text-gray-600">Contract has been modified</p>
+                </div>
+              </div>
+
+              <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+                <p class="text-sm text-red-800">
+                  <strong>Warning:</strong> This contract does not match the
+                  blockchain record. It may have been altered after embedding.
+                </p>
+              </div>
+
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2 text-red-600">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                  <span>Hash mismatch detected</span>
+                </div>
+                <div class="flex items-center gap-2 text-red-600">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                  <span>Modified: Feb 23, 2026 10:15 UTC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Info -->
+          <div class="space-y-6">
+            <!-- What Gets Verified -->
+            <div class="bg-white border-2 border-gray-200 rounded-2xl p-8">
+              <h3 class="text-xl font-bold text-gray-800 mb-6">
+                What Gets Verified
+              </h3>
+              <div class="space-y-4">
+                <div class="flex gap-3">
+                  <svg
+                    class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">
+                      Content Integrity
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Every word, clause, and character
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <svg
+                    class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">Timestamp</h4>
+                    <p class="text-sm text-gray-600">Exact time of embedding</p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <svg
+                    class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">Signers</h4>
+                    <p class="text-sm text-gray-600">All authorized parties</p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <svg
+                    class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">
+                      Modification History
+                    </h4>
+                    <p class="text-sm text-gray-600">Any changes or attempts</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tamper Detection -->
+            <div
+              class="bg-gradient-to-br from-red-50 to-pink-50 border-2 border-red-200 rounded-2xl p-8"
+            >
+              <h3 class="text-xl font-bold text-gray-800 mb-4">
+                🚨 Automatic Tamper Detection
+              </h3>
+              <p class="text-gray-700 mb-4">
+                If anyone modifies even a single character in the contract, all
+                signers are <strong>immediately notified</strong> via:
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <svg
+                    class="w-4 h-4 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700">Email Alert</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <svg
+                    class="w-4 h-4 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700">In-App Notification</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <svg
+                    class="w-4 h-4 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700">SMS (Optional)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: History -->
+      <div id="content-history" class="hidden">
+        <div class="bg-white border-2 border-gray-200 rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-gray-800 mb-6">
+            Blockchain Transaction History
+          </h3>
+
+          <!-- Timeline -->
+          <!-- Timeline -->
+<div id="history-timeline" class="space-y-6">
+  <!-- آیتم‌های تاریخچه به صورت داینامیک با جاوااسکریپت اینجا اضافه می‌شوند -->
+</div>
+
+<button
+  onclick="loadMoreHistory()"
+  class="w-full mt-6 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:border-gray-400 transition-all"
+>
+  Load More Transactions
+</button>
+
+            </div>
+          </div>
+
+          <button
+            class="w-full mt-6 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:border-gray-400 transition-all"
+          >
+            Load More Transactions
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="api.js"></script>
+    <script>
+      // ذخیره ID قرارداد آپلود‌شده
+      let uploadedContractId = null;
+
+      // متغیرهای تاریخچه بلاکچین
+      let historySkip = 0;
+      const historyLimit = 10;
+
+      // سوییچ بین تب‌ها
+      function switchTab(tab) {
+        document.getElementById("content-embed")?.classList.add("hidden");
+        document.getElementById("content-verify")?.classList.add("hidden");
+        document.getElementById("content-history")?.classList.add("hidden");
+
+        const contentEl = document.getElementById(`content-${tab}`);
+
+        if (contentEl) {
+          contentEl.classList.remove("hidden");
+          contentEl.classList.add("fade-in");
+        }
+
+        ["embed", "verify", "history"].forEach((t) => {
+          const tabEl = document.getElementById(`tab-${t}`);
+          if (!tabEl) return;
+
+          if (t === tab) {
+            if (t === "embed") {
+              tabEl.className =
+                "px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl font-semibold whitespace-nowrap";
+            } else if (t === "verify") {
+              tabEl.className =
+                "px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-semibold whitespace-nowrap";
+            } else {
+              tabEl.className =
+                "px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-semibold whitespace-nowrap";
+            }
+          } else {
+            tabEl.className =
+              "px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 whitespace-nowrap";
+          }
+        });
+
+        if (tab === "history") {
+          loadBlockchainHistory(true);
+        }
+      }
+
+      // Embed contract
+      async function embedContract() {
+        try {
+          if (!uploadedContractId) {
+            alert("Please upload a contract first.");
+            return;
+          }
+
+          const contractId = uploadedContractId;
+
+          const signers = Array.from(
+            document.querySelectorAll("#signers-list span"),
+          ).map((el) => el.innerText.trim());
+
+          if (signers.length === 0) {
+            alert("Please add at least one signer.");
+            return;
+          }
+
+          alert("⏳ Embedding contract to blockchain...");
+
+          const result = await API.embedContract(contractId, signers);
+
+          alert(
+            "✅ Contract successfully embedded!\n\n" +
+              "Hash: " +
+              result.contract_hash +
+              "\n" +
+              "Transaction: " +
+              result.tx_hash,
+          );
+        } catch (error) {
+          console.error(error);
+          alert("❌ Error embedding contract:\n" + (error.message || error));
+        }
+      }
+
+      // Verify contract by file
+      async function verifyContract() {
+  const fileInput = document.getElementById("verify-file-input");
+  const hashInput = document.getElementById("contract-hash-input");
+
+  // ✅ اگر input فایل اصلاً وجود نداشت
+  if (!fileInput) {
+    alert("File input element not found.");
+    return;
+  }
+
+  // ✅ اگر فایل انتخاب شده
+  if (fileInput.files && fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+
+    try {
+      const result = await API.verifyContractByFile(file);
+      showVerifyResult(result);
+    } catch (error) {
+      console.error(error);
+      alert("Verification failed.");
+    }
+
+    return;
+  }
+
+  // ✅ اگر هش وارد شده
+  if (hashInput && hashInput.value.trim() !== "") {
+    try {
+      const result = await API.verifyContractByHash(hashInput.value.trim());
+      showVerifyResult(result);
+    } catch (error) {
+      console.error(error);
+      alert("Verification failed.");
+    }
+
+    return;
+  }
+
+  // ✅ اگر هیچکدام نبود
+  alert("Please upload a file or enter a contract hash.");
+}
+
+
+      // Verify contract by hash
+      async function verifyByHash() {
+        try {
+          const hash = document
+            .getElementById("contract-hash-input")
+            .value.trim();
+
+          if (!hash) {
+            alert("Please enter contract hash.");
+            return;
+          }
+
+          const data = await API.verifyContractByHash(hash);
+
+          showVerifyResult(data);
+        } catch (error) {
+          console.error(error);
+          alert(error.message || "Verification failed.");
+        }
+      }
+
+      // نمایش نتیجه Verify
+      function showVerifyResult(data) {
+        const resultBox = document.getElementById("verification-result");
+        const warningBox = document.getElementById("tampered-warning");
+
+        if (!resultBox) return;
+
+        resultBox.style.display = "block";
+
+        document.getElementById("result-hash").innerText =
+          data.contract_hash || "-";
+
+        document.getElementById("result-block").innerText = data.block_number
+          ? "#" + data.block_number
+          : "-";
+
+        document.getElementById("result-time").innerText = data.timestamp
+          ? new Date(data.timestamp).toLocaleString()
+          : "-";
+
+        document.getElementById("result-signers").innerText =
+          data.signers && data.signers.length
+            ? data.signers.join(", ")
+            : "No signers";
+
+        const statusElement = document.getElementById("result-status");
+
+        if (warningBox) warningBox.style.display = "none";
+
+        if (data.status === "verified") {
+          statusElement.innerText = "✅ VERIFIED";
+          statusElement.className = "text-green-600 font-bold";
+        } else if (data.status === "tampered") {
+          statusElement.innerText = "⚠ TAMPERED";
+          statusElement.className = "text-red-600 font-bold";
+
+          if (warningBox) warningBox.style.display = "block";
+        } else {
+          statusElement.innerText = "❌ NOT FOUND";
+          statusElement.className = "text-gray-600 font-bold";
+        }
+      }
+
+      // بارگذاری تاریخچه بلاکچین
+      async function loadBlockchainHistory(reset = false) {
+        try {
+          if (reset) {
+            historySkip = 0;
+            document.getElementById("history-timeline").innerHTML = "";
+          }
+
+          const history = await API.getBlockchainHistory(
+            historySkip,
+            historyLimit,
+          );
+
+          const container = document.getElementById("history-timeline");
+
+          if (!container) return;
+
+          history.forEach((tx) => {
+            const item = document.createElement("div");
+
+            item.className = "p-4 border rounded-xl bg-white shadow-sm";
+
+            item.innerHTML = `
+        <div class="font-semibold mb-1">Contract Embedded</div>
+        <div class="text-sm text-gray-600">Hash: ${tx.contract_hash}</div>
+        <div class="text-sm text-gray-600">Block: #${tx.block_number}</div>
+        <div class="text-sm text-gray-600">Time: ${new Date(tx.timestamp).toLocaleString()}</div>
+      `;
+
+            container.appendChild(item);
+          });
+
+          historySkip += historyLimit;
+        } catch (error) {
+          console.error(error);
+          alert("Failed to load blockchain history.");
+        }
+      }
+
+      function loadMoreHistory() {
+        loadBlockchainHistory(false);
+      }
+
+      // وقتی صفحه لود شد
+      document.addEventListener("DOMContentLoaded", () => {
+        const uploadBox = document.getElementById("upload-box");
+        const fileInput = document.getElementById("contract-file-input");
+        const uploadText = document.getElementById("upload-text");
+
+        if (uploadBox && fileInput) {
+          uploadBox.addEventListener("click", () => {
+            fileInput.click();
+          });
+
+          fileInput.addEventListener("change", async () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            if (uploadText) {
+              uploadText.textContent = `Selected: ${file.name}`;
+            }
+
+            try {
+              alert("⏳ Uploading contract...");
+
+              const result = await API.uploadContract(file, file.name);
+
+              uploadedContractId = result.id || result.contract_id;
+
+              alert(
+                "✅ Contract uploaded successfully!\n\n" +
+                  "Title: " +
+                  (result.title || file.name) +
+                  "\nID: " +
+                  uploadedContractId,
+              );
+            } catch (error) {
+              console.error(error);
+              alert("❌ Upload failed:\n" + (error.message || error));
+            }
+          });
+        }
+
+        // مدیریت signer ها
+        const emailInput = document.getElementById("signer-email-input");
+        const addSignerBtn = document.getElementById("add-signer-btn");
+        const signersList = document.getElementById("signers-list");
+
+        if (emailInput && addSignerBtn && signersList) {
+          addSignerBtn.addEventListener("click", () => {
+            const email = emailInput.value.trim();
+            if (!email) return;
+
+            const exists = Array.from(
+              signersList.querySelectorAll("span"),
+            ).some(
+              (el) => el.innerText.trim().toLowerCase() === email.toLowerCase(),
+            );
+
+            if (exists) {
+              alert("This signer already exists.");
+              return;
+            }
+
+            const item = document.createElement("div");
+
+            item.className =
+              "flex items-center justify-between p-3 bg-gray-50 rounded-xl";
+
+            item.innerHTML = `
+        <span class="text-sm text-gray-700">${email}</span>
+        <button type="button" class="remove-signer text-red-600">
+          ✕
+        </button>
+      `;
+
+            signersList.appendChild(item);
+
+            emailInput.value = "";
+          });
+
+          signersList.addEventListener("click", (e) => {
+            const btn = e.target.closest(".remove-signer");
+
+            if (btn) {
+              const wrapper = btn.closest(".flex");
+
+              if (wrapper) wrapper.remove();
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

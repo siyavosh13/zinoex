@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Email Verification</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .card {
+        background: white;
+        padding: 40px;
+        width: 380px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        cursor: pointer;
+      }
+      .resend {
+        margin-top: 15px;
+        background: none;
+        color: #2563eb;
+        border: none;
+        cursor: pointer;
+      }
+      .resend:disabled {
+        color: #aaa;
+        cursor: not-allowed;
+      }
+      .timer {
+        font-size: 13px;
+        color: #999;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <h2>Email Verification</h2>
+      <p>Enter the verification code sent to your email</p>
+
+      <form id="verify-form">
+        <input
+          type="text"
+          id="code"
+          placeholder="Enter verification code"
+          maxlength="6"
+          required
+        />
+        <button type="submit">Verify Email</button>
+      </form>
+
+      <button id="resend-btn" class="resend">Resend Code</button>
+      <div id="timer" class="timer"></div>
+    </div>
+
+    <!-- مسیر درست برای محیط تو -->
+    <script src="api.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const email = sessionStorage.getItem("signup_email");
+
+        if (!email) {
+          alert("No email found. Please sign up again.");
+          window.location.href = "signup.html"; // مسیر درست
+          return;
+        }
+
+        const form = document.getElementById("verify-form");
+        const resendBtn = document.getElementById("resend-btn");
+        const timer = document.getElementById("timer");
+
+        let cooldown = 60;
+
+        function startTimer() {
+          resendBtn.disabled = true;
+          const interval = setInterval(() => {
+            timer.innerText = "You can resend code in " + cooldown + "s";
+            cooldown--;
+
+            if (cooldown < 0) {
+              clearInterval(interval);
+              timer.innerText = "";
+              resendBtn.disabled = false;
+              cooldown = 60;
+            }
+          }, 1000);
+        }
+
+        startTimer();
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const code = document.getElementById("code").value.trim();
+          const btn = form.querySelector("button");
+
+          btn.disabled = true;
+          btn.innerText = "Verifying...";
+
+          try {
+            const res = await API.verifyEmail({ email, code });
+
+            alert("Email verified successfully!");
+
+            // مسیر درست login
+            window.location.href = "login.html";
+          } catch (err) {
+            alert(err.message || "Verification failed");
+          } finally {
+            btn.disabled = false;
+            btn.innerText = "Verify Email";
+          }
+        });
+
+        resendBtn.addEventListener("click", async () => {
+          try {
+            await API.resendCode({ email });
+            alert("Verification code sent again");
+            startTimer();
+          } catch (err) {
+            alert(err.message || "Failed to resend code");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
