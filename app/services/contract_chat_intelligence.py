@@ -74,3 +74,56 @@ def analyze_message(contract_type: str, collected_data: dict, message: str):
         "updated_data": collected_data,
         "missing_fields": missing_fields
     }
+
+
+# =========================================================
+# Compatibility Class
+# =========================================================
+# بعضی بخش‌های پروژه، مخصوصاً:
+# app/routers/contract_chat.py
+# این کلاس را import می‌کنند:
+#
+# from app.services.contract_chat_intelligence import ContractChatIntelligence
+#
+# نسخه قبلی این فایل فقط function داشت و class نداشت.
+# برای اینکه ساختار قبلی خراب نشود، function ها را نگه داشتیم
+# و یک کلاس wrapper اضافه کردیم که همان function های بالا را صدا می‌زند.
+
+
+class ContractChatIntelligence:
+    """
+    Compatibility wrapper for contract chat intelligence functions.
+
+    This class keeps the existing module-level functions intact and exposes
+    them as instance methods for routers/services that expect a class-based API.
+    """
+
+    def __init__(self):
+        pass
+
+    def detect_contract_type(self, message: str):
+        return detect_contract_type(message)
+
+    def extract_basic_fields(self, message: str):
+        return extract_basic_fields(message)
+
+    def analyze_message(self, contract_type: str, collected_data: dict, message: str):
+        return analyze_message(contract_type, collected_data, message)
+
+    def analyze(self, contract_type: str, collected_data: dict, message: str):
+        """
+        Alias for analyze_message.
+
+        Added for compatibility in case another part of the project calls:
+        intelligence.analyze(...)
+        """
+        return self.analyze_message(contract_type, collected_data, message)
+
+    def process_message(self, contract_type: str, collected_data: dict, message: str):
+        """
+        Alias for analyze_message.
+
+        Added for compatibility in case another part of the project calls:
+        intelligence.process_message(...)
+        """
+        return self.analyze_message(contract_type, collected_data, message)

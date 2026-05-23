@@ -144,6 +144,22 @@ const API = {
       body: JSON.stringify(data),
     }),
 
+  // ==================== CONTRACT CHAT ====================
+  // Added for AI contract chat page integration.
+  // These endpoints use the existing apiRequest helper, token handling,
+  // and API_BASE structure without changing other parts of the app.
+
+  chatMessage: (payload) =>
+    apiRequest("/contracts/chat/message", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  getChatSession: (sessionId) =>
+    apiRequest(`/contracts/chat/session/${encodeURIComponent(sessionId)}`),
+
+  getMyChatSessions: () => apiRequest("/contracts/chat/sessions/me"),
+
   // ==================== CUSTOM CONTRACTS ====================
 
   generateCustomQuestions: (data) =>
@@ -435,3 +451,11 @@ window.AdminAPI = {
 
   deleteIndexContent: (key) => API.adminDeleteIndex(key),
 };
+
+// =====================================================
+// GLOBAL API EXPORT
+// =====================================================
+// This makes the API object available as window.API.
+// The contract chat HTML checks window.API.chatMessage before using it.
+
+window.API = API;

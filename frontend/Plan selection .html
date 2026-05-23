@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Your Plan - ZinoEx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .plan-card {
+        transition: all 0.3s ease;
+      }
+      .plan-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(102, 126, 234, 0.25);
+      }
+
+      .pulse-ring {
+        animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+      }
+      @keyframes pulseRing {
+        0% {
+          transform: scale(0.95);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(0.95);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Navigation -->
+    <nav
+      class="bg-white border-b sticky top-0 z-50 backdrop-blur-sm bg-white/90"
+    >
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg"
+            >
+              <svg
+                class="w-7 h-7 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h1
+                class="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent"
+              >
+                ZinoEx
+              </h1>
+              <p class="text-xs text-gray-500 -mt-1">AI Governance Platform</p>
+            </div>
+          </div>
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              href="index.html"
+              class="text-gray-700 hover:text-indigo-600 font-medium transition-colors"
+              >Home</a
+            >
+            <a href="#" class="text-indigo-600 font-medium">Plans</a>
+            <a
+              href="dashboard.html"
+              class="text-gray-700 hover:text-indigo-600 font-medium transition-colors"
+              >Dashboard</a
+            >
+          </div>
+          <div class="flex items-center gap-3">
+            <button
+              class="hidden sm:block px-5 py-2.5 text-gray-700 hover:text-indigo-600 font-semibold transition-colors"
+            >
+              Sign In
+            </button>
+            <button
+              class="px-6 py-2.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="py-16 px-6 lg:px-8 bg-gradient-to-br from-indigo-50/50 via-purple-50/30 to-pink-50/50"
+    >
+      <div class="max-w-7xl mx-auto text-center fade-in">
+        <div class="inline-block mb-6">
+          <span
+            class="px-4 py-2 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-full text-sm font-semibold"
+          >
+            💎 Choose Your Plan
+          </span>
+        </div>
+        <h1
+          class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+        >
+          Select Your
+          <span
+            class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent"
+          >
+            Subscription Plan
+          </span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+          Choose the plan that best fits your contract generation needs
+        </p>
+      </div>
+    </section>
+
+    <!-- Plans Section -->
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Max Plan -->
+        <div
+          class="plan-card bg-white border-2 border-gray-200 rounded-3xl p-10 cursor-pointer relative overflow-hidden"
+          onclick="selectPlan('max')"
+        >
+          <!-- Background Decoration -->
+          <div
+            class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full -mr-32 -mt-32 opacity-50"
+          ></div>
+
+          <div class="relative z-10">
+            <!-- Badge -->
+            <div class="inline-block mb-6">
+              <span
+                class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold"
+              >
+                POPULAR
+              </span>
+            </div>
+
+            <!-- Icon -->
+            <div
+              class="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-2xl pulse-ring"
+            >
+              <svg
+                class="w-12 h-12 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                ></path>
+              </svg>
+            </div>
+
+            <!-- Plan Name -->
+            <h3 class="text-4xl font-bold text-gray-900 text-center mb-3">
+              Max Plan
+            </h3>
+            <p class="text-gray-600 text-center mb-8 text-lg">
+              Perfect for growing businesses
+            </p>
+
+            <!-- Price -->
+            <div class="text-center mb-10">
+              <div class="text-6xl font-bold text-gray-900 mb-2">
+                $79
+                <span class="text-2xl text-gray-500 font-normal">/month</span>
+              </div>
+              <p class="text-gray-500">Billed monthly</p>
+            </div>
+
+            <!-- Features -->
+            <div class="space-y-4 mb-10">
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-gray-800 font-semibold">50 Contracts/month</p>
+                  <p class="text-sm text-gray-500">AI-powered generation</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-gray-800 font-semibold">AI Chat Assistant</p>
+                  <p class="text-sm text-gray-500">
+                    Smart conversational contract creation
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-gray-800 font-semibold">
+                    Contract Review & Analysis
+                  </p>
+                  <p class="text-sm text-gray-500">
+                    AI-powered risk assessment
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-gray-800 font-semibold">
+                    Blockchain Integration
+                  </p>
+                  <p class="text-sm text-gray-500">Secure contract storage</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-gray-800 font-semibold">Email Support</p>
+                  <p class="text-sm text-gray-500">24-hour response time</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <button
+              class="w-full px-8 py-5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all"
+            >
+              Choose Max Plan
+            </button>
+          </div>
+        </div>
+
+        <!-- Pro Plan -->
+        <div
+          class="plan-card bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-3xl p-10 cursor-pointer relative overflow-hidden text-white"
+          onclick="selectPlan('pro')"
+        >
+          <!-- Background Pattern -->
+          <div class="absolute top-0 right-0 opacity-10">
+            <svg class="w-96 h-96" fill="currentColor" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" />
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <!-- Badge -->
+            <div class="inline-block mb-6">
+              <span
+                class="px-4 py-2 bg-white/30 backdrop-blur-sm text-white rounded-full text-sm font-bold"
+              >
+                ⭐ RECOMMENDED
+              </span>
+            </div>
+
+            <!-- Icon -->
+            <div
+              class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-2xl pulse-ring"
+            >
+              <svg
+                class="w-12 h-12 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+
+            <!-- Plan Name -->
+            <h3 class="text-4xl font-bold text-white text-center mb-3">
+              Pro Plan
+            </h3>
+            <p class="text-white/90 text-center mb-8 text-lg">
+              For professionals and enterprises
+            </p>
+
+            <!-- Price -->
+            <div class="text-center mb-10">
+              <div class="text-6xl font-bold text-white mb-2">
+                $149
+                <span class="text-2xl text-white/80 font-normal">/month</span>
+              </div>
+              <p class="text-white/80">Billed monthly</p>
+            </div>
+
+            <!-- Features -->
+            <div class="space-y-4 mb-10">
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold">Unlimited Contracts</p>
+                  <p class="text-sm text-white/80">No monthly limits</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold">Advanced AI Chat</p>
+                  <p class="text-sm text-white/80">Priority AI processing</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold">
+                    Advanced Contract Review
+                  </p>
+                  <p class="text-sm text-white/80">
+                    Deep legal analysis & recommendations
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold">Premium Blockchain</p>
+                  <p class="text-sm text-white/80">
+                    Unlimited blockchain transactions
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold">Custom Templates</p>
+                  <p class="text-sm text-white/80">
+                    Create and save your own templates
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold">Priority Support</p>
+                  <p class="text-sm text-white/80">
+                    2-hour response time + phone support
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold">API Access</p>
+                  <p class="text-sm text-white/80">
+                    Integrate with your systems
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <button
+              class="w-full px-8 py-5 bg-white text-indigo-600 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all"
+            >
+              Choose Pro Plan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison Note -->
+      <div class="mt-12 text-center">
+        <p class="text-gray-600 mb-4">
+          Not sure which plan? Compare features side-by-side
+        </p>
+        <button
+          class="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:border-indigo-600 hover:text-indigo-600 transition-all"
+        >
+          View Detailed Comparison
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function selectPlan(plan) {
+        // Save selected plan
+        localStorage.setItem("selectedPlan", plan);
+
+        // Redirect to contract type selection
+        window.location.href = "contract-type-selection.html";
+      }
+    </script>
+  </body>
+</html>
