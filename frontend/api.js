@@ -150,7 +150,7 @@ const API = {
   // and API_BASE structure without changing other parts of the app.
 
   chatMessage: (payload) =>
-    apiRequest("/contracts/chat/message", {
+    apiRequest("/contract-chat/chat", {
       method: "POST",
       body: JSON.stringify(payload),
     }),

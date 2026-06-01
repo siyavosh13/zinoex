@@ -17,11 +17,13 @@
       .fade-in {
         animation: fadeIn 0.6s ease-in;
       }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
           transform: translateY(20px);
         }
+
         to {
           opacity: 1;
           transform: translateY(0);
@@ -31,11 +33,13 @@
       .chat-message {
         animation: slideIn 0.4s ease-out;
       }
+
       @keyframes slideIn {
         from {
           opacity: 0;
           transform: translateX(-10px);
         }
+
         to {
           opacity: 1;
           transform: translateX(0);
@@ -45,32 +49,38 @@
       .typing-indicator span {
         animation: blink 1.4s infinite;
       }
+
       .typing-indicator span:nth-child(2) {
         animation-delay: 0.2s;
       }
+
       .typing-indicator span:nth-child(3) {
         animation-delay: 0.4s;
       }
+
       @keyframes blink {
         0%,
         60%,
         100% {
           opacity: 0.3;
         }
+
         30% {
           opacity: 1;
         }
       }
 
-      .contract-type-card {
+      .ai-start-card {
         transition: all 0.3s ease;
       }
-      .contract-type-card:hover {
+
+      .ai-start-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+        box-shadow: 0 20px 45px rgba(102, 126, 234, 0.18);
       }
     </style>
   </head>
+
   <body class="bg-white">
     <!-- Navigation -->
     <nav
@@ -105,6 +115,7 @@
               <p class="text-xs text-gray-500 -mt-1">AI Contract Assistant</p>
             </div>
           </div>
+
           <div class="hidden md:flex items-center gap-8">
             <a
               href="index.html"
@@ -118,6 +129,7 @@
               >Dashboard</a
             >
           </div>
+
           <div class="flex items-center gap-3">
             <button
               class="hidden sm:block px-5 py-2.5 text-gray-700 hover:text-indigo-600 font-semibold transition-colors"
@@ -136,7 +148,7 @@
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-6 py-8">
-      <!-- Step 1: Contract Type Selection -->
+      <!-- Step 1: Start With AI Assistant -->
       <div id="contract-type-selection" class="fade-in">
         <div class="max-w-5xl mx-auto">
           <!-- Header -->
@@ -145,152 +157,94 @@
               <span
                 class="px-4 py-2 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-full text-sm font-semibold"
               >
-                🤖 AI-Powered Generation
+                🤖 AI-Powered Contract Generation
               </span>
             </div>
+
             <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Select Contract Type
+              Create Your Contract with AI
             </h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose the type of contract you want to create with AI assistance
+
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+              Start a conversation with ZinoEx AI. Describe what you need, and
+              the assistant will identify the contract type, collect the
+              required details, and prepare a professional draft.
             </p>
           </div>
 
-          <!-- Contract Types Grid -->
-          <div class="grid md:grid-cols-2 gap-6">
+          <!-- Start With AI Assistant Card -->
+          <div class="max-w-3xl mx-auto">
             <div
-              class="contract-type-card bg-white border-2 border-gray-200 rounded-2xl p-6 cursor-pointer hover:border-indigo-500"
-              onclick="selectContractType('employment_agreement')"
+              class="ai-start-card bg-white border-2 border-gray-200 rounded-3xl p-8 md:p-10 cursor-pointer hover:border-indigo-500 shadow-xl"
+              onclick="startWithAIAssistant()"
             >
-              <div class="flex items-center gap-4">
+              <div class="flex flex-col md:flex-row items-center gap-6">
                 <div
-                  class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-4xl flex-shrink-0"
+                  class="w-24 h-24 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 rounded-3xl flex items-center justify-center text-5xl flex-shrink-0"
                 >
-                  👔
+                  🤖
                 </div>
-                <div class="flex-1">
-                  <h3 class="font-bold text-gray-900 text-lg mb-1">
-                    Employment Agreement
+
+                <div class="flex-1 text-center md:text-left">
+                  <h3 class="font-extrabold text-gray-900 text-2xl mb-2">
+                    Start with AI Assistant
                   </h3>
-                  <p class="text-sm text-gray-600">
-                    Full-time employee contracts with benefits
+                  <p class="text-gray-600 text-base leading-7">
+                    No need to choose a contract type manually. The AI will
+                    understand your request, detect the best contract category,
+                    ask for missing information, and generate the draft.
                   </p>
                 </div>
-                <svg
-                  class="w-6 h-6 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+
+                <div
+                  class="w-14 h-14 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg flex-shrink-0"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  ></path>
-                </svg>
+                  <svg
+                    class="w-7 h-7 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M9 5l7 7-7 7"
+                    ></path>
+                  </svg>
+                </div>
               </div>
             </div>
 
-            <div
-              class="contract-type-card bg-white border-2 border-gray-200 rounded-2xl p-6 cursor-pointer hover:border-indigo-500"
-              onclick="selectContractType('independent_contractor_agreement')"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center text-4xl flex-shrink-0"
-                >
-                  💻
-                </div>
-                <div class="flex-1">
-                  <h3 class="font-bold text-gray-900 text-lg mb-1">
-                    Independent Contractor Agreement
-                  </h3>
-                  <p class="text-sm text-gray-600">
-                    Independent contractor relationships
-                  </p>
-                </div>
-                <svg
-                  class="w-6 h-6 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  ></path>
-                </svg>
+            <div class="mt-8 grid md:grid-cols-3 gap-4">
+              <div
+                class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 text-center"
+              >
+                <div class="text-3xl mb-2">🧠</div>
+                <h4 class="font-bold text-gray-900 mb-1">Smart Detection</h4>
+                <p class="text-sm text-gray-600">
+                  AI detects the contract type automatically.
+                </p>
               </div>
-            </div>
 
-            <div
-              class="contract-type-card bg-white border-2 border-gray-200 rounded-2xl p-6 cursor-pointer hover:border-indigo-500"
-              onclick="selectContractType('non_disclosure_agreement')"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-4xl flex-shrink-0"
-                >
-                  🔒
-                </div>
-                <div class="flex-1">
-                  <h3 class="font-bold text-gray-900 text-lg mb-1">
-                    Non-Disclosure Agreement
-                  </h3>
-                  <p class="text-sm text-gray-600">
-                    Confidentiality and information protection agreements
-                  </p>
-                </div>
-                <svg
-                  class="w-6 h-6 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  ></path>
-                </svg>
+              <div
+                class="bg-purple-50 border border-purple-100 rounded-2xl p-5 text-center"
+              >
+                <div class="text-3xl mb-2">💬</div>
+                <h4 class="font-bold text-gray-900 mb-1">Guided Chat</h4>
+                <p class="text-sm text-gray-600">
+                  The assistant asks only what is needed.
+                </p>
               </div>
-            </div>
 
-            <div
-              class="contract-type-card bg-white border-2 border-gray-200 rounded-2xl p-6 cursor-pointer hover:border-indigo-500"
-              onclick="selectContractType('service_agreement')"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-4xl flex-shrink-0"
-                >
-                  🤝
-                </div>
-                <div class="flex-1">
-                  <h3 class="font-bold text-gray-900 text-lg mb-1">
-                    Service Agreement
-                  </h3>
-                  <p class="text-sm text-gray-600">
-                    Service provider and client contracts
-                  </p>
-                </div>
-                <svg
-                  class="w-6 h-6 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  ></path>
-                </svg>
+              <div
+                class="bg-pink-50 border border-pink-100 rounded-2xl p-5 text-center"
+              >
+                <div class="text-3xl mb-2">📄</div>
+                <h4 class="font-bold text-gray-900 mb-1">Draft Ready</h4>
+                <p class="text-sm text-gray-600">
+                  Get a clean draft when details are complete.
+                </p>
               </div>
             </div>
           </div>
@@ -318,7 +272,7 @@
                 d="M15 19l-7-7 7-7"
               ></path>
             </svg>
-            <span class="font-semibold">Back to Contract Types</span>
+            <span class="font-semibold">Back</span>
           </button>
 
           <!-- Chat Container -->
@@ -348,10 +302,11 @@
                       ></path>
                     </svg>
                   </div>
+
                   <div>
                     <h3 class="text-2xl font-bold">ZinoEx AI Assistant</h3>
                     <p class="text-white/90 text-sm" id="chat-contract-type">
-                      Contract Assistant
+                      Smart Contract Assistant
                     </p>
                   </div>
                 </div>
@@ -394,11 +349,13 @@
                     ></path>
                   </svg>
                 </div>
+
                 <div class="flex items-center gap-2 typing-indicator">
                   <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full"></span>
                   <span class="w-2.5 h-2.5 bg-purple-500 rounded-full"></span>
                   <span class="w-2.5 h-2.5 bg-pink-500 rounded-full"></span>
                 </div>
+
                 <span class="text-sm text-gray-600 font-medium"
                   >AI is thinking...</span
                 >
@@ -415,6 +372,7 @@
                   class="flex-1 px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-indigo-500 focus:outline-none text-gray-800 placeholder-gray-400 text-lg"
                   onkeypress="if (event.key === 'Enter') sendMessage();"
                 />
+
                 <button
                   id="send-button"
                   onclick="sendMessage()"
@@ -436,6 +394,7 @@
                   </svg>
                 </button>
               </div>
+
               <div class="flex items-center justify-between mt-4">
                 <p class="text-sm text-gray-500">
                   Press
@@ -451,7 +410,7 @@
             </div>
           </div>
 
-          <!-- Contract Ready Section (Hidden initially) -->
+          <!-- Contract Ready Section -->
           <div
             id="contract-ready"
             class="hidden mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl p-8"
@@ -474,21 +433,27 @@
                   ></path>
                 </svg>
               </div>
+
               <div>
                 <h3 class="text-2xl font-bold text-gray-900">
-                  Information Collected!
+                  Contract Draft Ready!
                 </h3>
                 <p class="text-gray-600">
-                  You can now generate a draft based on the conversation so far
+                  The AI has prepared a draft based on your conversation.
                 </p>
               </div>
             </div>
 
             <!-- Draft Preview -->
             <div class="mb-6">
-              <h4 class="text-lg font-bold text-gray-900 mb-3">
-                Draft Preview
-              </h4>
+              <div class="flex items-center justify-between gap-4 mb-3">
+                <h4 class="text-lg font-bold text-gray-900">Draft Preview</h4>
+                <div
+                  id="detected-contract-badge"
+                  class="hidden px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold"
+                ></div>
+              </div>
+
               <div
                 id="draft-preview"
                 class="bg-white border border-green-200 rounded-xl p-5 text-gray-800 whitespace-pre-wrap leading-7 max-h-[400px] overflow-y-auto"
@@ -500,8 +465,9 @@
                 onclick="generateContract()"
                 class="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
               >
-                🚀 Generate Contract
+                🚀 Open Contract Draft
               </button>
+
               <button
                 onclick="continueChat()"
                 class="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-bold text-lg hover:border-green-500 hover:text-green-600 transition-all"
@@ -515,8 +481,8 @@
     </div>
 
     <script src="api.js"></script>
+
     <script>
-      let selectedContractType = null;
       let conversationHistory = [];
       let selectedPlan = "pro";
 
@@ -524,35 +490,57 @@
       let generatedDraft = null;
       let extractedContractData = {};
       let detectedContractType = null;
-      let chatStatus = "collecting_info";
+      let missingFields = [];
+      let chatStatus = "collecting";
       let isSendingMessage = false;
+
+      const CHAT_SESSION_STORAGE_KEY = "contract_chat_session_id";
 
       if (localStorage.getItem("selectedPlan")) {
         selectedPlan = localStorage.getItem("selectedPlan");
       }
 
-      function selectContractType(type) {
-        selectedContractType = type;
+      function createSessionId() {
+        if (window.crypto && typeof window.crypto.randomUUID === "function") {
+          return window.crypto.randomUUID();
+        }
+
+        return (
+          "session_" +
+          Date.now().toString(36) +
+          "_" +
+          Math.random().toString(36).substring(2, 12)
+        );
+      }
+
+      function getOrCreateChatSessionId() {
+        let sessionId = localStorage.getItem(CHAT_SESSION_STORAGE_KEY);
+
+        if (!sessionId) {
+          sessionId = createSessionId();
+          localStorage.setItem(CHAT_SESSION_STORAGE_KEY, sessionId);
+        }
+
+        return sessionId;
+      }
+
+      function resetChatSession() {
+        localStorage.removeItem(CHAT_SESSION_STORAGE_KEY);
+        currentChatSessionId = getOrCreateChatSessionId();
+      }
+
+      function startWithAIAssistant() {
+        currentChatSessionId = getOrCreateChatSessionId();
 
         document
           .getElementById("contract-type-selection")
           .classList.add("hidden");
+
         document.getElementById("ai-chat-interface").classList.remove("hidden");
 
-        const typeNames = {
-          employment_agreement: "Employment Agreement",
-          independent_contractor_agreement: "Independent Contractor Agreement",
-          non_disclosure_agreement: "Non-Disclosure Agreement",
-          service_agreement: "Service Agreement",
-          consulting_agreement: "Consulting Agreement",
-          lease_agreement: "Lease Agreement",
-          license_agreement: "License Agreement",
-          loan_agreement: "Loan Agreement",
-          sales_agreement: "Sales Agreement",
-        };
-
         document.getElementById("chat-contract-type").textContent =
-          typeNames[type] || "Contract Assistant";
+          "Smart Contract Assistant";
+
         document.getElementById("user-plan").textContent =
           selectedPlan === "pro" ? "Pro Plan" : "Max Plan";
 
@@ -562,6 +550,7 @@
 
       function backToSelection() {
         document.getElementById("ai-chat-interface").classList.add("hidden");
+
         document
           .getElementById("contract-type-selection")
           .classList.remove("hidden");
@@ -571,44 +560,49 @@
         document.getElementById("chat-input").value = "";
         document.getElementById("draft-preview").textContent = "";
 
+        const badge = document.getElementById("detected-contract-badge");
+        badge.classList.add("hidden");
+        badge.textContent = "";
+
         conversationHistory = [];
-        selectedContractType = null;
-        currentChatSessionId = null;
         generatedDraft = null;
         extractedContractData = {};
         detectedContractType = null;
-        chatStatus = "collecting_info";
+        missingFields = [];
+        chatStatus = "collecting";
         isSendingMessage = false;
+
+        /*
+          اگر می‌خواهی با Back زدن همان session قبلی ادامه پیدا کند،
+          خط resetChatSession را کامنت کن.
+          فعلاً بهتر است با برگشت، چت بعدی از session تازه شروع شود.
+        */
+        resetChatSession();
 
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       function initializeChat() {
-        const typeNames = {
-          employment_agreement: "Employment Agreement",
-          independent_contractor_agreement: "Independent Contractor Agreement",
-          non_disclosure_agreement: "Non-Disclosure Agreement",
-          service_agreement: "Service Agreement",
-          consulting_agreement: "Consulting Agreement",
-          lease_agreement: "Lease Agreement",
-          license_agreement: "License Agreement",
-          loan_agreement: "Loan Agreement",
-          sales_agreement: "Sales Agreement",
-        };
+        const chatMessages = document.getElementById("chat-messages");
 
-        const contractName = typeNames[selectedContractType] || "Contract";
+        if (chatMessages.children.length > 0) return;
 
         const welcomeMessage = `Hello! I'm ZinoEx AI, your contract assistant. 👋
 
-I can help you create a professional **${contractName}**.
+You don't need to select a contract type manually.
 
-Please describe what you need in your own words. For example, you can tell me:
-• Who are the parties involved
-• What is the purpose of the contract
-• What services, payment terms, dates, or obligations should be included
-• Any special conditions you want to add
+Just describe what you want to create, and I will:
+• Understand your request
+• Detect the most suitable contract type
+• Ask for any missing information
+• Prepare a professional contract draft when ready
 
-You don't need legal language. Just explain it naturally, and I'll help organize it for contract creation.`;
+For example, you can say:
+"I need a contract for hiring a freelance developer"
+or
+"I want an NDA between my company and a consultant"
+or
+"I need a service agreement for a client project"`;
 
         addMessageToChat("ai", welcomeMessage);
       }
@@ -643,7 +637,9 @@ You don't need legal language. Just explain it naturally, and I'll help organize
                 </svg>
               </div>
               <div class="flex-1 bg-white rounded-2xl p-6 shadow-md border-2 border-gray-100">
-                <div class="text-gray-800 leading-relaxed whitespace-pre-line">${formatMessage(message)}</div>
+                <div class="text-gray-800 leading-relaxed whitespace-pre-line">${formatMessage(
+                  message,
+                )}</div>
               </div>
             </div>
           `;
@@ -678,6 +674,7 @@ You don't need legal language. Just explain it naturally, and I'll help organize
 
       function setSendingState(isSending) {
         isSendingMessage = isSending;
+
         const input = document.getElementById("chat-input");
         const sendButton = document.getElementById("send-button");
 
@@ -692,14 +689,21 @@ You don't need legal language. Just explain it naturally, and I'll help organize
       }
 
       async function sendChatMessageToBackend(payload) {
+        /*
+          اگر api.js را هم آپدیت کرده باشی و window.API.chatMessage
+          به /api/contract-chat/chat وصل باشد، همین استفاده می‌شود.
+        */
         if (window.API && typeof window.API.chatMessage === "function") {
           return await window.API.chatMessage(payload);
         }
 
+        /*
+          fallback مستقیم برای زمانی که api.js هنوز آپدیت نشده باشد.
+        */
         const token =
           localStorage.getItem("accessToken") || localStorage.getItem("token");
 
-        const response = await fetch("/api/contracts/chat/message", {
+        const response = await fetch("/api/contract-chat/chat", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -710,14 +714,80 @@ You don't need legal language. Just explain it naturally, and I'll help organize
 
         if (!response.ok) {
           let errorMessage = "Failed to send message to chat API.";
+
           try {
             const errorData = await response.json();
-            errorMessage = errorData.detail || errorMessage;
+            errorMessage =
+              errorData.detail ||
+              errorData.message ||
+              errorData.error ||
+              errorMessage;
           } catch (e) {}
+
           throw new Error(errorMessage);
         }
 
         return await response.json();
+      }
+
+      function normalizeStatus(status) {
+        if (!status) return "collecting";
+
+        const value = String(status).toLowerCase();
+
+        if (
+          value === "completed" ||
+          value === "complete" ||
+          value === "done" ||
+          value === "draft_ready"
+        ) {
+          return "completed";
+        }
+
+        return value;
+      }
+
+      function updateDetectedContractTypeUI(type) {
+        if (!type) return;
+
+        detectedContractType = type;
+
+        const readableType = String(type)
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, function (char) {
+            return char.toUpperCase();
+          });
+
+        document.getElementById("chat-contract-type").textContent =
+          readableType;
+
+        const badge = document.getElementById("detected-contract-badge");
+        badge.textContent = readableType;
+        badge.classList.remove("hidden");
+      }
+
+      function updateContractReadySection(response) {
+        const status = normalizeStatus(response.status);
+        const draft =
+          response.draft ||
+          response.draft_content ||
+          response.generated_contract ||
+          null;
+
+        if (draft) {
+          generatedDraft = draft;
+          document.getElementById("draft-preview").textContent = generatedDraft;
+        }
+
+        if (status === "completed" && generatedDraft) {
+          document.getElementById("contract-ready").classList.remove("hidden");
+        } else {
+          document.getElementById("contract-ready").classList.add("hidden");
+
+          if (!generatedDraft) {
+            document.getElementById("draft-preview").textContent = "";
+          }
+        }
       }
 
       async function sendMessage() {
@@ -726,7 +796,12 @@ You don't need legal language. Just explain it naturally, and I'll help organize
 
         if (!message || isSendingMessage) return;
 
+        if (!currentChatSessionId) {
+          currentChatSessionId = getOrCreateChatSessionId();
+        }
+
         addMessageToChat("user", message);
+
         conversationHistory.push({
           role: "user",
           content: message,
@@ -741,52 +816,73 @@ You don't need legal language. Just explain it naturally, and I'll help organize
             session_id: currentChatSessionId,
             message: message,
             language: "English",
-            contract_type: selectedContractType,
+            tone: "formal",
+            context: {
+              source: "zinoex_frontend",
+              plan: selectedPlan,
+            },
           };
 
           const response = await sendChatMessageToBackend(payload);
 
           console.log("Backend response:", response);
 
-          currentChatSessionId = response.session_id || currentChatSessionId;
-          detectedContractType =
+          /*
+            Backend جدید ممکن است session_id را مستقیم یا داخل session برگرداند.
+          */
+          currentChatSessionId =
+            response.session_id ||
+            response.session?.session_id ||
+            response.session?.id ||
+            currentChatSessionId;
+
+          if (currentChatSessionId) {
+            localStorage.setItem(
+              CHAT_SESSION_STORAGE_KEY,
+              currentChatSessionId,
+            );
+          }
+
+          chatStatus = normalizeStatus(response.status);
+
+          extractedContractData =
+            response.extracted_data ||
+            response.session?.data ||
+            response.session?.fields ||
+            extractedContractData;
+
+          missingFields =
+            response.missing_fields ||
+            response.session?.missing_fields ||
+            missingFields ||
+            [];
+
+          const backendDetectedType =
             response.detected_contract_type ||
             response.contract_type ||
-            detectedContractType ||
-            selectedContractType;
-          extractedContractData =
-            response.extracted_data || extractedContractData;
-          chatStatus = response.status || chatStatus;
+            response.session?.detected_contract_type ||
+            response.session?.contract_type ||
+            null;
+
+          if (backendDetectedType) {
+            updateDetectedContractTypeUI(backendDetectedType);
+          }
 
           hideTyping();
 
           if (response.reply) {
             addMessageToChat("ai", response.reply);
+
             conversationHistory.push({
               role: "ai",
               content: response.reply,
             });
           }
 
-          if (response.status === "completed") {
-            generatedDraft =
-              response.draft_content ||
-              response.generated_contract ||
-              response.reply ||
-              generatedDraft;
-
-            document
-              .getElementById("contract-ready")
-              .classList.remove("hidden");
-
-            document.getElementById("draft-preview").textContent =
-              generatedDraft || "";
-          } else {
-            document.getElementById("contract-ready").classList.add("hidden");
-            document.getElementById("draft-preview").textContent = "";
-          }
+          updateContractReadySection(response);
         } catch (error) {
           hideTyping();
+
           addMessageToChat(
             "ai",
             `Sorry, I couldn't connect to the contract chat service right now.
@@ -810,12 +906,21 @@ Please try again in a moment.`,
         }
 
         const draftWindow = window.open("", "_blank");
+
         if (!draftWindow) {
           alert(
             "Popup blocked. Please allow popups to view the generated contract.",
           );
           return;
         }
+
+        const readableType = detectedContractType
+          ? String(detectedContractType)
+              .replace(/_/g, " ")
+              .replace(/\b\w/g, function (char) {
+                return char.toUpperCase();
+              })
+          : "General Contract";
 
         draftWindow.document.write(`
           <!doctype html>
@@ -832,6 +937,7 @@ Please try again in a moment.`,
                   margin: 0;
                   padding: 40px 20px;
                 }
+
                 .container {
                   max-width: 900px;
                   margin: 0 auto;
@@ -840,24 +946,30 @@ Please try again in a moment.`,
                   padding: 40px;
                   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
                 }
+
                 h1 {
                   margin-top: 0;
                   font-size: 28px;
                   color: #111827;
                 }
+
                 .meta {
                   color: #6b7280;
                   margin-bottom: 24px;
                   font-size: 14px;
+                  line-height: 1.7;
                 }
+
                 .content {
                   white-space: pre-wrap;
                   line-height: 1.7;
                   font-size: 16px;
                 }
+
                 .actions {
                   margin-top: 30px;
                 }
+
                 button {
                   padding: 12px 18px;
                   border: none;
@@ -869,16 +981,18 @@ Please try again in a moment.`,
                 }
               </style>
             </head>
+
             <body>
               <div class="container">
                 <h1>Generated Contract Draft</h1>
+
                 <div class="meta">
-                  Contract type: ${escapeHtml(
-                    detectedContractType || selectedContractType || "general",
-                  )}<br>
+                  Contract type: ${escapeHtml(readableType)}<br>
                   Session ID: ${escapeHtml(currentChatSessionId || "-")}
                 </div>
+
                 <div class="content">${escapeHtml(generatedDraft)}</div>
+
                 <div class="actions">
                   <button onclick="window.print()">Print / Save PDF</button>
                 </div>

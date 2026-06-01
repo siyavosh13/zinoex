@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Contract Generation - ZinoEx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mode-card {
+        transition: all 0.3s ease;
+      }
+
+      .mode-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Header -->
+    <header class="bg-white border-b sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg"
+            >
+              <svg
+                class="w-7 h-7 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h1
+                class="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent"
+              >
+                ZinoEx
+              </h1>
+              <p class="text-xs text-gray-500">Smart Contract Generation</p>
+            </div>
+          </div>
+
+          <button
+            onclick="window.history.back()"
+            class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-800"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              ></path>
+            </svg>
+            <span class="font-semibold">Back</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+      <!-- Page Header -->
+      <div class="text-center mb-12 fade-in">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          AI-Powered Contract Generation
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Choose the contract generation experience that best matches your plan
+          and workflow.
+        </p>
+      </div>
+
+      <!-- Two Cards -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto fade-in">
+        <!-- Card 1: AI Chat Contract -->
+        <div
+          class="mode-card bg-white border-2 border-gray-200 rounded-2xl p-8 cursor-pointer"
+          onclick="goToAIChatContract()"
+        >
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 mx-auto"
+          >
+            <svg
+              class="w-9 h-9 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4-.8L3 20l1.2-3.2A7.756 7.756 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              ></path>
+            </svg>
+          </div>
+
+          <h3 class="text-2xl font-bold text-gray-800 text-center mb-3">
+            AI Chat Contract
+          </h3>
+
+          <p class="text-gray-600 text-center mb-6">
+            Create contracts through a smart conversational AI experience with
+            dynamic follow-up questions and draft generation.
+          </p>
+
+          <div class="space-y-3 text-sm text-gray-600 mb-8">
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-green-600 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+              <span>Interactive AI conversation</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-green-600 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+              <span>Best for premium users</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-green-600 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+              <span>Advanced contract drafting workflow</span>
+            </div>
+          </div>
+
+          <button
+            class="w-full px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all"
+          >
+            Open AI Chat
+          </button>
+        </div>
+
+        <!-- Card 2: Standard Generator -->
+        <div
+          class="mode-card bg-white border-2 border-gray-200 rounded-2xl p-8 cursor-pointer"
+          onclick="goToStandardGenerator()"
+        >
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 mx-auto"
+          >
+            <svg
+              class="w-9 h-9 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
+            </svg>
+          </div>
+
+          <h3 class="text-2xl font-bold text-gray-800 text-center mb-3">
+            Standard Contract Generator
+          </h3>
+
+          <p class="text-gray-600 text-center mb-6">
+            Use the classic contract generation flow designed for simpler and
+            lower-tier plan users.
+          </p>
+
+          <div class="space-y-3 text-sm text-gray-600 mb-8">
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-green-600 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+              <span>Simple generation flow</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-green-600 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+              <span>Suitable for lower-tier plans</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-green-600 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+              <span>Fast and familiar experience</span>
+            </div>
+          </div>
+
+          <button
+            class="w-full px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-all"
+          >
+            Open Standard Generator
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function goToAIChatContract() {
+        window.location.href = "Ai chat contract.html";
+      }
+
+      function goToStandardGenerator() {
+        window.location.href = "contract-generation-page.html";
+      }
+    </script>
+  </body>
+</html>
+<script>
+  function goToAIChatContract() {
+    window.location.href = "Ai_chat_contract.html";
+  }
+
+  function goToStandardGenerator() {
+    window.location.href = "contract-generation-page.html";
+  }
+</script>

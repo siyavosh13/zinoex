@@ -4,7 +4,10 @@ from app.database import engine, Base
 from app.routers import auth, contract, profile, admin, subscription
 from app.routers import blockchain
 from app.routers import dashboard   
-from app.routers import contract_chat
+from app.routers.contract_chat import router as contract_chat_router
+
+
+
 
 
 # --------------- NEW IMPORTS FOR FRONTEND ---------------
@@ -40,7 +43,8 @@ app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 app.include_router(subscription.router, prefix="/api/subscription", tags=["Subscription"])
 app.include_router(blockchain.router, prefix="/api")
 app.include_router(dashboard.router, prefix="/api/dashboard", tags=["Dashboard"])   # ←←← NEW LINE
-app.include_router(contract_chat.router)
+app.include_router(contract_chat_router)
+
 
 
 @app.on_event("startup")
